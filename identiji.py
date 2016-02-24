@@ -5,10 +5,11 @@
 
 from math import pow
 import random
+import os
 from PIL import Image, ImageDraw
 
-size = 400
-blocks = 3
+size = 600
+blocks = 7
 
 def getHash(s):
 	hash = 0
@@ -27,28 +28,42 @@ def finalHash(name):
 	return addZeroes(format(abs(getHash(name)), "x"), 8)[:8]
 
 
-def genImage(unhash, hash):
+def genImage(outFile, hash):
 	global size, blocks
+
 	col = ( int(hash[0:2], 16), int(hash[2:4], 16), int(hash[4:6], 16), 255 )
 	random.seed(int(hash[6:8], 16))
 
-	img = Image.new("RGBA", (size * 10 , size * 10), (240,240,240,255))
+	img = Image.new("RGBA", (size, size), (240,240,240,255))
 	drawer = ImageDraw.Draw(img)
 
-	mult = size/((blocks*2)-1);
+	blockSize = size/blocks/2
+
+	def offsetRect(x, y, c):
+		drawer.rectangle([(x * blockSize, y * blockSize),
+			(x * blockSize + blockSize, y * blockSize + blockSize)], fill = c)
+
 	for x in range(0, blocks):
 		for y in range(0, blocks * 2):
 			if random.randint(0, 10) > 5:
-				drawer.rectangle([ (x*mult, y*mult), (mult, mult) ], fill = col)
-				drawer.rectangle([ (size - (x+1) * mult, y*mult), (mult, mult) ], fill = col)
+				offsetRect(x,y,col)
+				offsetRect((2*blocks) - (x + 1),y,col)
 
-	img.save(unhash + ".png", "PNG")
 
-while True:
-        name = raw_input("Name:- ")
-        hs = finalHash(name)
-        print "Hash:-  " + hs
-        genImage(name, hs)
-        print "%s.png saved in this directory." % name
+	img.save(outFile, "PNG")
+
+
+
+
+# This method is the one we use!!!!!!!
+def generateAvatar(name, outPath):
+        hash = finalHash(name)
+        pathMinusFileName = os.path.dirname(os.path.realpath(outPath))
+        if not os.path.exists(pathMinusFileName):
+        	os.mkdir(pathMinusFileName)
+        genImage(outPath, hash)
+
+for s in [ "Kieran McCool", "Lewis Boyd", "Alistair Cross", "Ryan Fox" ]:
+	generateAvatar(s, os.path.join(os.path.dirname(os.path.realpath(__file__)), "avatars/" , s + ".png"))
 
         
