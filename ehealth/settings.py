@@ -53,6 +53,8 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'ehealth.urls'
 
+TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
