@@ -6,13 +6,23 @@
 </head>
 <body>
     <h1>eHealth</h1>
-    {% if user.is_authenticated %}
-        <h2>Welcome back, {{  user.username }}</h2>
-    {% else %}
-        <h2>Welcome to eHealth</h2>
-    {% endif %}
-    {{ message }}<br/><br/>
-    <a href="/register/">Register Here</a><br/>
-    <a href="/login/">Login</a>
+        <div id="Login/Register">
+        <a href="/fhsa/register/">Register Here</a><br/>
+        <a href="/fhsa/login/">Login</a>
+    </div>
+    <div id="Welcome Message">
+        {% if user.is_authenticated %}
+            <h2>Welcome back, {{  user.username }}</h2>
+        {% else %}
+            <h2>Welcome to eHealth</h2>
+        {% endif %}
+    </div>
+    <div id="Search Bar">
+        <form type="get" action="." style="margin: 0">
+        <input  id="search_box" type="text" name="search_box"  placeholder="Enter Symptoms..." >
+        <button id="web_search_submit" type="submit" >Web Search</button>
+        <button id="fhsa_search_submit" type="submit">eHealth Search</button>
+        </form>
+    </div>
 </body>
 </html>

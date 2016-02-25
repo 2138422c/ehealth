@@ -19,5 +19,5 @@ import fhsa
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('fhsa.urls'),)
+    url(r'^fhsa/', include('fhsa.urls'),)
 ]
