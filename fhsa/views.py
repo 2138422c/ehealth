@@ -1,18 +1,19 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from fhsa.forms import UserForm, UserProfileForm
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+@login_required
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/fhsa/')
+
 def index(request):
-    context_dict = {'message': "Hello World"}
-    return render(request, 'fhsa/index.html', context_dict)
+    return render(request, 'fhsa/index.html', {})
 
 def register(request):
-    """
-    TODO: Currently not working, will need to fix
-    """
     registered = False
 
     # If it's a HTTP POST, we're interested in processing form data.
@@ -67,9 +68,6 @@ def register(request):
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
 
 def user_login(request):
-    """
-    TODO: Will also need to fix
-    """
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -79,9 +77,9 @@ def user_login(request):
                 login(request, user)
                 return HttpResponseRedirect('/fhsa/')
             else:
-                return HttpResponse("Your FHSA account is disabled.")
+                return HttpResponse("Account is disabled.")
         else:
-            print "Invalid login details: {0}, {1}".format(username, password)
+            print "Invalid login details: {0} {1}".format(username, password)
             return HttpResponse("Invalid login details supplied.")
     else:
-        return render(request, 'fhsa/login.html/', {})
+        return render(request, 'fhsa/login.html', {})
