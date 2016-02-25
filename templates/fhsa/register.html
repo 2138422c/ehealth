@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register with eHealth</h1>
+
+    {%  if registered %}
+    Thank you for registering.
+
+    {% else %}
+    Register:
+
+    <form id="user_form" method="post" action="/fhsa/register/"
+          enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+
+        <input type="submit" name="submit" value="Register" />
+    </form>
+    {% endif %}
+</body>
+</html>
