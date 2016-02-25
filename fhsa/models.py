@@ -1,24 +1,25 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
-from django.conf import settings
-from django import forms
+from datetime import date
 
 # Create your models here.
 class UserProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    avatar = models.ImageField(null=True)
-    DOB = models.DateField(null=True)
-    email = models.EmailField(null=True)
-    #age = date.today.year - DOB.year - ((date.today.month, date.today.day) < (DOB.month, DOB.day))
+    """
+    The profile for users of the site
+    """
+    user = models.OneToOneField(User, null=True)
+    avatar = models.ImageField(upload_to='profile_images', blank=True)
+    DOB = models.DateField()
+    email = models.EmailField(blank=True)
+   # age = int((date.today() - DOB).days / 365.2425)
     MALE = 'M'
     FEMALE = 'F'
     GENDERS = (
         (MALE, 'Male'),
         (FEMALE, 'Female'),
     )
-    gender = models.CharField(max_length=1, choices=GENDERS, null=True)
-
+    gender = models.CharField(max_length=1, choices=GENDERS)
 
     def __unicode__(self):
         return self.user.username
