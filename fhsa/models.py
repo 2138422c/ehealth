@@ -11,7 +11,6 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, null=True)
     avatar = models.ImageField(upload_to='profile_images', blank=True)
     DOB = models.DateField()
-    email = models.EmailField(blank=True)
    # age = int((date.today() - DOB).days / 365.2425)
     MALE = 'M'
     FEMALE = 'F'

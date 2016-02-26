@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from fhsa.forms import UserForm, UserProfileForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from identiji import generateAvatar
 
 @login_required
 def logout_view(request):
@@ -12,6 +13,9 @@ def logout_view(request):
 
 def index(request):
     return render(request, 'fhsa/index.html', {})
+
+def about(request):
+    return render(request, 'fhsa/about.html', {})
 
 def register(request):
     registered = False
@@ -42,7 +46,9 @@ def register(request):
             # Did the user provide a profile picture?
             # If so, we need to get it from the input form and put it in the UserProfile model.
             if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
+                profile.avatar = request.FILES['picture']
+            #else:
+                #profile.avatar = generateAvatar(user.username, "profile_images")
 
             # Now we save the UserProfile model instance.
             profile.save()

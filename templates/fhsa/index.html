@@ -18,20 +18,19 @@
         {% if user.is_authenticated %}
             <h2>Welcome back, {{  user.username }}</h2>
             <!--Need to get avatars working -->
-            <img src="../../avatars/Alistair%20Cross.jpeg" alt="Error">
         {% else %}
             <h2>Welcome to eHealth</h2>
         {% endif %}
     </div>
     <div id="Search Bar">
         <form type="get" action="." style="margin: 0">
-        <input  id="search_box" type="text" name="search_box"  placeholder="Enter Symptoms..." >
+        <input  id="search_box" type="text" name="search_box"  placeholder="Enter Symptoms..." ><br/>
         <button id="web_search_submit" type="submit" >Web Search</button>
         <button id="fhsa_search_submit" type="submit">eHealth Search</button>
         </form>
     </div>
     <div id="Footer">
-        About
+       <a href="/fhsa/about/">About</a>
     </div>
 </body>
 </html>
