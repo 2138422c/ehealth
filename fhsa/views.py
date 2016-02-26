@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from fhsa.forms import UserForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
+from identiji import generateAvatar
+import os
 
 @login_required
 def home(request):
@@ -51,10 +53,16 @@ def register(request):
             profile = profile_form.save(commit=False)
             profile.user = user
 
+            # Check that the profile images directory exists - this is the one we used in the model
+            if not os.path.exists("profile_images"):
+                os.mkdir("profile_images")
+
             # Did the user provide a profile picture?
             # If so, we need to get it from the input form and put it in the UserProfile model.
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
+            if 'avatar' in request.FILES:
+                profile.avatar = request.FILES['avatar']
+            else:
+                profile.avatar = generateAvatar(str(profile.user), "profile_images")
 
             # Now we save the UserProfile model instance.
             profile.save()

@@ -77,22 +77,23 @@ def genImage(outPath, hash):
 				# Colour the block and it's counterpart on the other half for rotational symetry.
 				offsetRect(x,y,col)
 				offsetRect((2*BLOCKS) - (x + 1),y,col)
-	fileout = os.path.join(outPath, hash + ".jpeg")
-	img.save(fileout, "jpeg")
+	fileout = os.path.join(outPath, hash + ".png")
+	img.save(fileout, "png")
 	imgAsString = open(fileout).read()
 	return fileout
 
 # This method is the one we use!!!!!!!
 def generateAvatar(name, outPath):
-        # gets a properly formatted hash
-        hash = finalHash(name)
-        # Makes sure the location we're saving to exists.
-        pathMinusFileName = os.path.dirname(os.path.realpath(outPath))
-        # if not, creates it
-        if not os.path.exists(pathMinusFileName):
-        	os.mkdir(pathMinusFileName)
-        # Generates the image to the desired location
-        return genImage(outPath, hash)
+	print name
+	# gets a properly formatted hash
+	hash = finalHash(name)
+	# Makes sure the location we're saving to exists.
+	pathMinusFileName = os.path.dirname(os.path.realpath(outPath))
+	# if not, creates it
+	if not os.path.exists(pathMinusFileName):
+		os.mkdir(pathMinusFileName)
+	# Generates the image to the desired location
+	return genImage(outPath, hash)
 
 def sample():
 	# This sample method shows how you use the generateAvatar method.
