@@ -17,6 +17,8 @@
     <div id="Welcome Message">
         {% if user.is_authenticated %}
             <h2>Welcome back, {{  user.username }}</h2>
+            <!--Need to get avatars working -->
+            <img src="../../avatars/Alistair%20Cross.jpeg" alt="Error">
         {% else %}
             <h2>Welcome to eHealth</h2>
         {% endif %}
