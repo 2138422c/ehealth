@@ -36,7 +36,7 @@ def finalHash(name):
 	return addZeroes(format(abs(getHash(name)), "x"), 8)[:8]
 
 
-def genImage(outFile, hash):
+def genImage(outPath, hash):
 	global SIZE, BLOCKS
 
 	# Colour is a tuple in format (R, G, B, a) - populated by hash data
@@ -77,9 +77,10 @@ def genImage(outFile, hash):
 				# Colour the block and it's counterpart on the other half for rotational symetry.
 				offsetRect(x,y,col)
 				offsetRect((2*BLOCKS) - (x + 1),y,col)
-
-	img.save(hash + ".jpeg", "jpeg")
-	return open(hash + ".jpeg").read()
+	fileout = os.path.join(outPath, hash + ".jpeg")
+	img.save(fileout, "jpeg")
+	imgAsString = open(fileout).read()
+	return fileout
 
 # This method is the one we use!!!!!!!
 def generateAvatar(name, outPath):
@@ -91,7 +92,7 @@ def generateAvatar(name, outPath):
         if not os.path.exists(pathMinusFileName):
         	os.mkdir(pathMinusFileName)
         # Generates the image to the desired location
-        genImage(outPath, hash)
+        return genImage(outPath, hash)
 
 def sample():
 	# This sample method shows how you use the generateAvatar method.
