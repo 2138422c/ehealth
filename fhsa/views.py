@@ -1,23 +1,31 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from fhsa.forms import UserForm, UserProfileForm
-from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from identiji import generateAvatar
+
+@login_required
+def home(request):
+  return HttpResponse('/fhsa/')
+
+# Create your views here.
+def index(request):
+    context_dict = {'message': "Hello World"}
+    return render(request, 'fhsa/index.html', context_dict)
 
 @login_required
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/fhsa/')
 
-def index(request):
-    return render(request, 'fhsa/index.html', {})
-
 def about(request):
     return render(request, 'fhsa/about.html', {})
 
 def register(request):
+    """
+    TODO: Currently not working, will need to fix
+    """
     registered = False
 
     # If it's a HTTP POST, we're interested in processing form data.
@@ -46,9 +54,7 @@ def register(request):
             # Did the user provide a profile picture?
             # If so, we need to get it from the input form and put it in the UserProfile model.
             if 'picture' in request.FILES:
-                profile.avatar = request.FILES['picture']
-            #else:
-                #profile.avatar = generateAvatar(user.username, "profile_images")
+                profile.picture = request.FILES['picture']
 
             # Now we save the UserProfile model instance.
             profile.save()
@@ -72,20 +78,3 @@ def register(request):
     return render(request,
             'fhsa/register.html',
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
-
-def user_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
-        if user:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect('/fhsa/')
-            else:
-                return HttpResponse("Account is disabled.")
-        else:
-            print "Invalid login details: {0} {1}".format(username, password)
-            return HttpResponse("Invalid login details supplied.")
-    else:
-        return render(request, 'fhsa/login.html', {})
