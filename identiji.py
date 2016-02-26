@@ -7,6 +7,7 @@ from math import pow
 import random
 import os
 from PIL import Image, ImageDraw
+import StringIO
 
 # Output avatars will be SIZExSIZE pixels
 SIZE = 800
@@ -76,8 +77,9 @@ def genImage(outFile, hash):
 				# Colour the block and it's counterpart on the other half for rotational symetry.
 				offsetRect(x,y,col)
 				offsetRect((2*BLOCKS) - (x + 1),y,col)
-	# Save file to the outFile location in png format.
-	img.save(outFile, "PNG")
+
+	img.save(hash + ".jpeg", "jpeg")
+	return open(hash + ".jpeg").read()
 
 # This method is the one we use!!!!!!!
 def generateAvatar(name, outPath):
