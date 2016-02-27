@@ -11,7 +11,6 @@ import os
 def home(request):
   return HttpResponse('/fhsa/')
 
-# Create your views here.
 def index(request):
     context_dict = {'message': "Hello World"}
     return render(request, 'fhsa/index.html', context_dict)
