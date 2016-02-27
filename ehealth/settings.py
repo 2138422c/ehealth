@@ -24,7 +24,7 @@ SECRET_KEY = 'yet1&lbt@w9ae=e8_q-kc2xd4)f4wh4ikf^se!1j2#bddc@gbh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+LOGIN_REDIRECT_URL = '/fhsa/'
 ALLOWED_HOSTS = []
 
 # Application definition
