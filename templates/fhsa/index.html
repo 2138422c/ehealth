@@ -7,9 +7,11 @@
 <body>
     <h1><a href="/fhsa/">eHealth</a></h1>
         <div id="Login/Register">
-        <a href="/fhsa/register/">Register Here</a><br/>
+        <a href="/fhsa/register/">Register Here</a>
         {% if user.is_authenticated %}
             <a href="/fhsa/logout">Logout</a>
+            <img src="{{ MEDIA_URL }}{{ user.username }}.png" alt="profile picture"/>
+            <strong>{{ user.username }}</strong>
         {% else %}
             <a href="/fhsa/login/">Login</a>
         {% endif %}

@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from registration.backends.simple.views import RegistrationView
+from django.views.static import serve
+from settings import MEDIA_ROOT
 
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, request, user):
@@ -25,4 +27,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^fhsa/', include('fhsa.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^profile_images/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT})
 ]
