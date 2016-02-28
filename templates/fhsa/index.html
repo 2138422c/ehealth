@@ -6,20 +6,21 @@
 </head>
 <body>
     <h1><a href="/fhsa/">eHealth</a></h1>
-        <div id="Login/Register">
-        <a href="/fhsa/register/">Register Here</a>
+        <div id="User Banner"></div>
         {% if user.is_authenticated %}
             <a href="/fhsa/logout">Logout</a>
-            <img src="{{ MEDIA_URL }}{{ user.username }}.png" alt="profile picture"/>
+            <img src="{{ MEDIA_URL }}/profile_images/{{ user.username }}.png" alt="profile picture"/>
             <strong>{{ user.username }}</strong>
         {% else %}
+            <a href="/fhsa/register/">Register Here</a>
             <a href="/fhsa/login/">Login</a>
         {% endif %}
     </div>
     <div id="Welcome Message">
         {% if user.is_authenticated %}
             <h2>Welcome back, {{  user.username }}</h2>
-            <!--Need to get avatars working -->
+            <!--Need to get avatars working
+            Also need to get user pages working-->
         {% else %}
             <h2>Welcome to eHealth</h2>
         {% endif %}

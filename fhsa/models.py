@@ -23,3 +23,15 @@ class UserProfile(models.Model):
 
     def __unicode__(self):
         return self.user.username
+
+class UserFolder(models.Model):
+    """
+    Folders that users can create
+    """
+    name = models.CharField(max_length=32, null=True)
+    description = models.TextField(max_length=500, null=True)
+    user = models.OneToOneField(User, null=True)
+    id = models.AutoField(primary_key=True)
+
+    def __unicode__(self):
+        return self.name

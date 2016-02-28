@@ -1,10 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import logout
 from django.http import HttpResponseRedirect, HttpResponse
 from fhsa.forms import UserForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
 from identiji import generateAvatar
+from .models import UserFolder
 import os
 
 @login_required
@@ -12,8 +12,11 @@ def home(request):
   return HttpResponse('/fhsa/')
 
 def index(request):
-    context_dict = {'message': "Hello World"}
-    return render(request, 'fhsa/index.html', context_dict)
+    return render(request, 'fhsa/index.html', {})
+
+def folder(request, folder_id):
+    folder = get_object_or_404(UserFolder, pk=id)
+    return render(request, 'fhsa/folder.html', {'folder': folder})
 
 @login_required
 def logout_view(request):
