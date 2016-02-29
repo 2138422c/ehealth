@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.user }}'s Page</title>
+</head>
+<body>
+    <h1><a href="/fhsa/">eHealth</a></h1>
+    <div id="header">
+        {% block content %}
+            <img src="{{ user.avatar }}">
+        {% endblock %}
+        <h2>{{ user.user }}</h2>
+    </div>
+    <div id="bio">
+        <h3>Bio</h3>
+        Date of Birth: {{ user.DOB }} <br/>
+        Gender: {{ user.gender }}<br/>
+        Email: {{ userorg.email }}
+    </div>
+</body>
+</html>

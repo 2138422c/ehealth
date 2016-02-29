@@ -4,12 +4,18 @@ from django.http import HttpResponseRedirect, HttpResponse
 from fhsa.forms import UserForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
 from identiji import generateAvatar
-from .models import UserFolder
+from .models import UserFolder, UserProfile, User
 import os
 
 @login_required
 def home(request):
   return HttpResponse('/fhsa/')
+
+def user_page(request):
+    folder = UserFolder.objects.all()
+    user = UserProfile.objects.get(user=request.user)
+    userorg = User.objects.get(username = request.user)
+    return render(request, 'fhsa/user_page.html', {'user': user, 'folder': folder, 'userorg': userorg})
 
 def index(request):
     return render(request, 'fhsa/index.html', {})

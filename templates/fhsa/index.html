@@ -9,8 +9,9 @@
         <div id="User Banner"></div>
         {% if user.is_authenticated %}
             <a href="/fhsa/logout">Logout</a>
+            <a href="/fhsa/user_page">
             <img src="{{ MEDIA_URL }}/profile_images/{{ user.username }}.png" alt="profile picture"/>
-            <strong>{{ user.username }}</strong>
+            {{ user.username }}</a>
         {% else %}
             <a href="/fhsa/register/">Register Here</a>
             <a href="/fhsa/login/">Login</a>
