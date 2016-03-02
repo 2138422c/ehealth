@@ -26,8 +26,9 @@ SECRET_KEY = 'yet1&lbt@w9ae=e8_q-kc2xd4)f4wh4ikf^se!1j2#bddc@gbh'
 DEBUG = True
 LOGIN_REDIRECT_URL = '/fhsa/'
 ALLOWED_HOSTS = []
-MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'profile_images')
-MEDIA_URL = 'http://localhost:8000/profile_images/'
+MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'static')
+MEDIA_URL = 'http://localhost:8000/static/'
+STATIC_URL = '/static/'
 # Application definition
 
 INSTALLED_APPS = [

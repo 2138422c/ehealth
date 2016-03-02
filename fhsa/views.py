@@ -54,7 +54,7 @@ def register(request):
             if 'avatar' in request.FILES:
                 profile.avatar = request.FILES['avatar']
             else:
-                profile.avatar = generateAvatar(str(profile.user), "profile_images")
+                profile.avatar = generateAvatar(str(profile.user), "static/profile_images")
 
             profile.save()
 
