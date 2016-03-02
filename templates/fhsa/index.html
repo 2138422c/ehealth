@@ -5,8 +5,8 @@
     <title>eHealth</title>
 </head>
 <body>
-    <h1><a href="/fhsa/">eHealth</a></h1>
-        <div id="User Banner"></div>
+    <div id="UserBanner"></div>
+        <h1><a href="/fhsa/">eHealth</a></h1>
         {% if user.is_authenticated %}
             <a href="/fhsa/logout">Logout</a>
             <a href="/fhsa/user_page">
@@ -17,7 +17,7 @@
             <a href="/fhsa/login/">Login</a>
         {% endif %}
     </div>
-    <div id="Welcome Message">
+    <div id="WelcomeMessage">
         {% if user.is_authenticated %}
             <h2>Welcome back, {{  user.username }}</h2>
             <!--Need to get avatars working
@@ -26,7 +26,7 @@
             <h2>Welcome to eHealth</h2>
         {% endif %}
     </div>
-    <div id="Search Bar">
+    <div id="SearchBar">
         <form type="get" action="." style="margin: 0">
         <input  id="search_box" type="text" name="search_box"  placeholder="Enter Symptoms..." ><br/>
         <button id="web_search_submit" type="submit" >Web Search</button>

@@ -28,4 +28,4 @@ def  get_sensitivity_rating(text):
     if readability < 50:
         print "This article contains content that is difficult to understand\n\n"
 
-get_sensitivity_rating(text)
+get_sensitivity_rating(text) # Remove this when we're ready to implement

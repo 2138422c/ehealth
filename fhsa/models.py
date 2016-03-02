@@ -32,6 +32,7 @@ class UserFolder(models.Model):
     description = models.TextField(max_length=500, null=True)
     user = models.ForeignKey(UserProfile, null=True)
     id = models.AutoField(primary_key=True)
+    
 
     def __unicode__(self):
         return self.name
