@@ -26,9 +26,6 @@ SECRET_KEY = 'yet1&lbt@w9ae=e8_q-kc2xd4)f4wh4ikf^se!1j2#bddc@gbh'
 DEBUG = True
 LOGIN_REDIRECT_URL = '/fhsa/'
 ALLOWED_HOSTS = []
-MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'static')
-MEDIA_URL = 'http://localhost:8000/static/'
-STATIC_URL = '/static/'
 # Application definition
 
 INSTALLED_APPS = [
@@ -121,4 +118,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_URL = '/static/'
+PROJECT_DIR = os.path.dirname(__file__)
+STATIC_URL = '/fhsastatic/'
+STATICFILES_DIRS = (os.path.join(PROJECT_DIR), 'fhsastatic')

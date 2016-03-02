@@ -20,9 +20,16 @@ def user_page(request):
 def index(request):
     return render(request, 'fhsa/index.html', {})
 
-def folder(request, folder_id):
-    folder = get_object_or_404(UserFolder, pk=id)
-    return render(request, 'fhsa/folder.html', {'folder': folder})
+def folder(request, folder_name_slug):
+    context_dict = {}
+    try:
+        folder = UserFolder.objects.get(slug=folder_name_slug)
+        context_dict['folder_name'] = folder.name
+
+    except UserFolder.DoesNotExist:
+        pass
+
+    return render(request, 'fhsa/folder.html', context_dict)
 
 @login_required
 def logout_view(request):
@@ -48,13 +55,13 @@ def register(request):
             profile = profile_form.save(commit=False)
             profile.user = user
 
-            if not os.path.exists("profile_images"):
+            if not os.path.exists("fhsastatic/profile_images"):
                 os.mkdir("profile_images")
 
             if 'avatar' in request.FILES:
                 profile.avatar = request.FILES['avatar']
             else:
-                profile.avatar = generateAvatar(str(profile.user), "static/profile_images")
+                profile.avatar = generateAvatar(str(profile.user), "fhsastatic/profile_images")
 
             profile.save()
 

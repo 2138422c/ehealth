@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^about/$', views.about, name="about"),
     url(r'^user_page/$', views.user_page, name="user_page"),
+    url(r'^folder/(?P<folder_name_slug>[\w\-]+)/$', views.folder, name='category'),
     ]

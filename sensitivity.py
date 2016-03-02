@@ -18,13 +18,13 @@ def  get_sensitivity_rating(text):
     sentimentality = blob.subjectivity * 100
     readability = textstat.flesch_reading_ease(text)
     sensitivity = (sentimentality + readability)/2
-    print sensitivity
+    print "Sensitivity:", sensitivity
     if sensitivity < 50:
         print "This article may not handle the subject in a sensitive manner. \n\n"
-    print sentimentality
+    print "Subjectivity:", sentimentality
     if sentimentality < 50:
         print "This article may loaded with subjectivity.\n\n"
-    print readability
+    print "Readability:", readability
     if readability < 50:
         print "This article contains content that is difficult to understand\n\n"
 

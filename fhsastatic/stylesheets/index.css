@@ -1,0 +1,41 @@
+body{
+    margin:0px;
+    background: #ffffff;;
+}
+
+h1 {
+    font-size: 300%;
+    display: inline-block;
+
+}
+
+#search{
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+    text-align: center;
+    font-size: 200%;
+}
+
+#userheader {
+    display: inline-block;
+    overflow: hidden;
+    float: right;
+}
+
+input.search_box{
+    background-color:#fff;
+    font-size:0.9em;
+    line-height:1em;
+    height:50px;
+    width: 90%;
+    font-size: 60%;
+}
+
+#footer{
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+}

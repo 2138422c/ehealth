@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import date
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -28,11 +28,21 @@ class UserFolder(models.Model):
     """
     Folders that users can create
     """
-    name = models.CharField(max_length=32, null=True)
+    name = models.CharField(max_length=32, unique=True)
     description = models.TextField(max_length=500, null=True)
     user = models.ForeignKey(UserProfile, null=True)
     id = models.AutoField(primary_key=True)
+    slug = models.SlugField()
     
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(UserFolder, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.name
+
+class Result(models.Model):
+    """
+    Results from APIs
+    """
+    
