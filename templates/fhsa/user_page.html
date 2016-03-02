@@ -18,5 +18,13 @@
         Gender: {{ user.gender }}<br/>
         Email: {{ userorg.email }}
     </div>
+    <div id="folder_menu">
+        {% for foo in folder %}
+            {% if foo.user == user.user %}
+                {{ foo.name }} <br/>
+                {{ foo.description }} <br/>
+            {% endif %}
+        {% endfor %}
+    </div>
 </body>
 </html>
