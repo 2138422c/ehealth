@@ -6,21 +6,12 @@ import xml.etree.ElementTree as ET
 hfKey = "dbhhdqjgwwbigtwk"
 bingKey = "d0yoBORYWMf3D7h5lT8Bum8iLRnhJg3UFNBQjD636gc"
 
-def webContent(url):
-	print url
-	file = urllib2.urlopen(url)
-	data = file.read()
-	file.close()
-	return str(data)
-
 def queryFormat(s):
 	return "%%27%s%%27" % slugify(s)
 
 def medlineSearch(term):
 	base = "https://wsearch.nlm.nih.gov/ws/query"
 	base = urlBuilder(base, { "db":"healthTopics", "term":queryFormat(term)})
-	
-	print base
 
 	request = urllib2.urlopen(base)
 	results = ET.fromstring(request.read())
@@ -50,9 +41,20 @@ def bingSearch(term):
 	return results
 
 
-def hfSearch(term):
-	base = "http://healthfinder.gov/developer/Search.xml"
-	return "nyi"
+def hfSearch(term, age, gender, who="someone", pregnant=0):
+	example = "http://healthfinder.gov/developer/MyHFSearch.json?api_key=demo_api_key&who=child&age=16&gender=male"
+	base = "http://healthfinder.gov/developer/Search.json"
+	base = urlBuilder(base, { "keyword":queryFormat(term), "gender":gender,
+	 "age":age, "who":who, "pregnant":pregnant, "api_key":hfKey })
+	print base
+
+	request = urllib2.Request(base)
+	requestOpener = urllib2.build_opener()
+	response = requestOpener.open(request) 
+
+	results = json.load(response)
+
+	return results
 
 def urlBuilder(baseUrl, dict):
 	out = "?%s=%s" % (dict.keys()[0], dict[dict.keys()[0]])
@@ -67,7 +69,10 @@ def testBing():
 	f = open("test", "w+")
 	for r in d:
 		f.write("\n%s\n" % r)
+def testML():
+	d = medlineSearch("chronic diarrhea")
+	for i in d:
+		print str(i) + "\n\n"
 
-d = medlineSearch("chronic diarrhea")
-for i in d:
-	print str(i) + "\n\n"
+d = hfSearch("Pain", 19, "male")
+print d
