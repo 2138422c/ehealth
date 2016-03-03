@@ -2,6 +2,7 @@ import urllib2
 from django.template.defaultfilters import slugify
 import json
 import xml.etree.ElementTree as ET
+import re
 
 hfKey = "dbhhdqjgwwbigtwk"
 bingKey = "d0yoBORYWMf3D7h5lT8Bum8iLRnhJg3UFNBQjD636gc"
@@ -48,16 +49,16 @@ def hfSearch(term, age, gender, who="someone", pregnant=0):
 			out += "%%22%s" % i
 		out += "%22"
 		return out
+	def stripHtml(s):
+		return re.sub('<[^>]*>', '', s)
 
-	example = "http://healthfinder.gov/developer/MyHFSearch.json?api_key=demo_api_key&who=child&age=16&gender=male"
 	base = "http://healthfinder.gov/developer/Search.json"
 	base = urlBuilder(base, { "keyword":hfSillyFormatting(term), "gender":gender,
 	 "age":age, "who":who, "pregnant":pregnant, "api_key":hfKey })
-	print base
 
 	request = urllib2.urlopen(base)
 	response = request.read()
-	results = json.loads(response)
+	results = json.loads(stripHtml(response))["Result"]
 	return results
 
 def urlBuilder(baseUrl, dict):
@@ -73,16 +74,18 @@ def testBing():
 	f = open("testBing.txt", "w+")
 	for r in d:
 		f.write("\n%s\n" % r)
+
 def testML():
 	d = medlineSearch("chronic diarrhea")
-	f = open("testHealthFinder.txt", "w+")
+	f = open("testMedLine.txt", "w+")
 	for i in d:
 		f.write(str(i) + "\n\n")
 
 def testHF():
-	f = open("testMedline.txt", "w+")
+	f = open("testHealthFinder.txt", "w+")
 	d = hfSearch("Pain", 19, "male")
-	for k in d.keys():
-		f.write("%s:\n%s" % (k, d[k]))
+	f.write(str(d))
+#	for k in d.keys():
+#		f.write("%s:\n\n\n\t%s" % (k, d[k]))
 
 testBing(); testML(); testHF()
