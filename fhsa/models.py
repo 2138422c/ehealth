@@ -20,7 +20,6 @@ class UserProfile(models.Model):
         (FEMALE, 'Female'),
     )
     gender = models.CharField(max_length=1, choices=GENDERS)
-
     def __unicode__(self):
         return self.user.username
 

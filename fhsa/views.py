@@ -15,10 +15,14 @@ def user_page(request):
     folder = UserFolder.objects.all()
     user = UserProfile.objects.get(user=request.user)
     userorg = User.objects.get(username = request.user)
-    return render(request, 'fhsa/user_page.html', {'user': user, 'folder': folder, 'userorg': userorg})
+    avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
+    print avatarSrc
+    return render(request, 'fhsa/user_page.html', {'user': user, 'folder': folder, 'userorg': userorg, 'avatarSrc': avatarSrc})
 
 def index(request):
-    return render(request, 'fhsa/index.html', {})
+    user = UserProfile.objects.get(user=request.user)
+    avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
+    return render(request, 'fhsa/index.html', {"avatarSrc":avatarSrc})
 
 def folder(request, folder_name_slug):
     context_dict = {}
@@ -56,7 +60,7 @@ def register(request):
             profile.user = user
 
             if not os.path.exists("fhsastatic/profile_images"):
-                os.mkdir("profile_images")
+                os.mkdir("fhsastatic/profile_images")
 
             if 'avatar' in request.FILES:
                 profile.avatar = request.FILES['avatar']
