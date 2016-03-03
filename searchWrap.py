@@ -42,18 +42,22 @@ def bingSearch(term):
 
 
 def hfSearch(term, age, gender, who="someone", pregnant=0):
+	def hfSillyFormatting(s):
+		out = ""
+		for i in s.split(" "):
+			out += "%%22%s" % i
+		out += "%22"
+		return out
+
 	example = "http://healthfinder.gov/developer/MyHFSearch.json?api_key=demo_api_key&who=child&age=16&gender=male"
 	base = "http://healthfinder.gov/developer/Search.json"
-	base = urlBuilder(base, { "keyword":queryFormat(term), "gender":gender,
+	base = urlBuilder(base, { "keyword":hfSillyFormatting(term), "gender":gender,
 	 "age":age, "who":who, "pregnant":pregnant, "api_key":hfKey })
 	print base
 
-	request = urllib2.Request(base)
-	requestOpener = urllib2.build_opener()
-	response = requestOpener.open(request) 
-
-	results = json.load(response)
-
+	request = urllib2.urlopen(base)
+	response = request.read()
+	results = json.loads(response)
 	return results
 
 def urlBuilder(baseUrl, dict):
@@ -66,13 +70,19 @@ def urlBuilder(baseUrl, dict):
 #print urlBuilder("www.kieranisgod.com", { "query":"toast is good", "user":"Kieran McCool" })
 def testBing():
 	d =  bingSearch("Toast and beans") # I was eating those at the time of writing.
-	f = open("test", "w+")
+	f = open("testBing.txt", "w+")
 	for r in d:
 		f.write("\n%s\n" % r)
 def testML():
 	d = medlineSearch("chronic diarrhea")
+	f = open("testHealthFinder.txt", "w+")
 	for i in d:
-		print str(i) + "\n\n"
+		f.write(str(i) + "\n\n")
 
-d = hfSearch("Pain", 19, "male")
-print d
+def testHF():
+	f = open("testMedline.txt", "w+")
+	d = hfSearch("Pain", 19, "male")
+	for k in d.keys():
+		f.write("%s:\n%s" % (k, d[k]))
+
+testBing(); testML(); testHF()
