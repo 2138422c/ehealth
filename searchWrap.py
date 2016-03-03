@@ -19,13 +19,14 @@ def medlineSearch(term):
 def bingSearch(query):
 	credentialBing = 'Basic ' + (':%s' % bingKey).encode('base64')[:-1] # the "-1" is to remove the trailing "\n" which encode adds
 	def sillyBingFormatting(s):
-		return "%%27%s%%27" % (slugify(s))
+		return "%%27%s%%27" % slugify(s)
 
 	top = 20
-	offset = 0
 
-	url = 'https://api.datamarket.azure.com/Bing/Search/Web?' + \
-	      'Query=%s&$top=%d&$format=json' % (sillyBingFormatting(query), top)
+	url = 'https://api.datamarket.azure.com/Bing/Search/Web'
+	url = urlBuilder(url, {"Query":sillyBingFormatting(query), "$top":top, "$format":"json"})
+
+	print url
 
 	request = urllib2.Request(url)
 	request.add_header('Authorization', credentialBing)
@@ -42,10 +43,10 @@ def hfSearch(term):
 	return "nyi"
 
 def urlBuilder(baseUrl, dict):
-	out = "?%s=%s" % (dict.keys()[0], slugify(dict[dict.keys()[0]]))
+	out = "?%s=%s" % (dict.keys()[0], dict[dict.keys()[0]])
 
 	for i in range(1, len(dict.keys())):
-		out += "&%s=%s" % ( dict.keys()[i], slugify(dict[dict.keys()[i]]) ) 
+		out += "&%s=%s" % ( dict.keys()[i], dict[dict.keys()[i]] ) 
 	return baseUrl + out
 
 #print urlBuilder("www.kieranisgod.com", { "query":"toast is good", "user":"Kieran McCool" })
