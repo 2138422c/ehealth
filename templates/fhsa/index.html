@@ -12,7 +12,8 @@
         {% if user.is_authenticated %}
             <a href="/fhsa/logout">Logout</a>
             <a href="/fhsa/user_page">
-            <img src="{{ avatarSrc }}" alt="profile picture" width=32 height=32/>
+            
+            <img src="{{ avatarSrc }}" alt="profile picture" width=70 height=70/>
             {{ user.username }}</a>
         {% else %}
             <a href="/fhsa/register/">Register Here</a>

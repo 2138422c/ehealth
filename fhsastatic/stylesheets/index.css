@@ -21,6 +21,7 @@ h1 {
     display: inline-block;
     overflow: hidden;
     float: right;
+    font-size: 130%;
 }
 
 input.search_box{
