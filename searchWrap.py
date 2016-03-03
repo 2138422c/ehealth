@@ -1,6 +1,7 @@
 import urllib2
 from django.template.defaultfilters import slugify
 import json
+import xml.etree.ElementTree as ET
 
 hfKey = "dbhhdqjgwwbigtwk"
 bingKey = "d0yoBORYWMf3D7h5lT8Bum8iLRnhJg3UFNBQjD636gc"
@@ -12,21 +13,32 @@ def webContent(url):
 	file.close()
 	return str(data)
 
+def queryFormat(s):
+	return "%%27%s%%27" % slugify(s)
+
 def medlineSearch(term):
 	base = "https://wsearch.nlm.nih.gov/ws/query"
-	return "nyi"
+	base = urlBuilder(base, { "db":"healthTopics", "term":queryFormat(term)})
+	
+	print base
 
-def bingSearch(query):
+	request = urllib2.urlopen(base)
+	results = ET.fromstring(request.read())
+
+	out = []
+
+	for document in results.iter('document'):
+			out += [{ content.attrib["name"]: content.text for content in document.iter("content") }]
+
+	return out
+
+def bingSearch(term):
 	credentialBing = 'Basic ' + (':%s' % bingKey).encode('base64')[:-1] # the "-1" is to remove the trailing "\n" which encode adds
-	def sillyBingFormatting(s):
-		return "%%27%s%%27" % slugify(s)
 
 	top = 20
 
 	url = 'https://api.datamarket.azure.com/Bing/Search/Web'
-	url = urlBuilder(url, {"Query":sillyBingFormatting(query), "$top":top, "$format":"json"})
-
-	print url
+	url = urlBuilder(url, {"Query":queryFormat(term), "$top":top, "$format":"json"})
 
 	request = urllib2.Request(url)
 	request.add_header('Authorization', credentialBing)
@@ -50,8 +62,12 @@ def urlBuilder(baseUrl, dict):
 	return baseUrl + out
 
 #print urlBuilder("www.kieranisgod.com", { "query":"toast is good", "user":"Kieran McCool" })
+def testBing():
+	d =  bingSearch("Toast and beans") # I was eating those at the time of writing.
+	f = open("test", "w+")
+	for r in d:
+		f.write("\n%s\n" % r)
 
-d =  bingSearch("Toast and beans") # I was eating those at the time of writing.
-f = open("test", "w+")
-for r in d:
-	f.write("\n%s\n" % r)
+d = medlineSearch("chronic diarrhea")
+for i in d:
+	print str(i) + "\n\n"
