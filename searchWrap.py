@@ -18,19 +18,21 @@ def medlineSearch(term):
 
 def bingSearch(query):
 	credentialBing = 'Basic ' + (':%s' % bingKey).encode('base64')[:-1] # the "-1" is to remove the trailing "\n" which encode adds
-	searchString = '%27Xbox+One%27'
+	def sillyBingFormatting(s):
+		return "%%27%s%%27" % (slugify(s))
+
 	top = 20
 	offset = 0
 
-	url = 'https://api.datamarket.azure.com/Bing/Search/Image?' + \
-	      'Query=%s&$top=%d&$skip=%d&$format=json' % (searchString, top, offset)
+	url = 'https://api.datamarket.azure.com/Bing/Search/Web?' + \
+	      'Query=%s&$top=%d&$format=json' % (sillyBingFormatting(query), top)
 
 	request = urllib2.Request(url)
 	request.add_header('Authorization', credentialBing)
 	requestOpener = urllib2.build_opener()
 	response = requestOpener.open(request) 
 
-	results = json.load(response)
+	results = json.load(response)["d"]["results"]
 
 	return results
 
@@ -48,7 +50,7 @@ def urlBuilder(baseUrl, dict):
 
 #print urlBuilder("www.kieranisgod.com", { "query":"toast is good", "user":"Kieran McCool" })
 
-d =  bingSearch("")
+d =  bingSearch("Toast and beans") # I was eating those at the time of writing.
 f = open("test", "w+")
-for k in d.keys():
-	f.write("%s\t:\n %s" % (k, d[k]))
+for r in d:
+	f.write("\n%s\n" % r)
