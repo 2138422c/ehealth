@@ -1,21 +1,54 @@
-medlineKey = ""
-hfKey = ""
-bingKey = ""
+import urllib2
+from django.template.defaultfilters import slugify
+import json
 
-def medlineSearch():
+hfKey = "dbhhdqjgwwbigtwk"
+bingKey = "d0yoBORYWMf3D7h5lT8Bum8iLRnhJg3UFNBQjD636gc"
+
+def webContent(url):
+	print url
+	file = urllib2.urlopen(url)
+	data = file.read()
+	file.close()
+	return str(data)
+
+def medlineSearch(term):
+	base = "https://wsearch.nlm.nih.gov/ws/query"
 	return "nyi"
 
-def bingSearch():
+def bingSearch(query):
+	credentialBing = 'Basic ' + (':%s' % bingKey).encode('base64')[:-1] # the "-1" is to remove the trailing "\n" which encode adds
+	searchString = '%27Xbox+One%27'
+	top = 20
+	offset = 0
+
+	url = 'https://api.datamarket.azure.com/Bing/Search/Image?' + \
+	      'Query=%s&$top=%d&$skip=%d&$format=json' % (searchString, top, offset)
+
+	request = urllib2.Request(url)
+	request.add_header('Authorization', credentialBing)
+	requestOpener = urllib2.build_opener()
+	response = requestOpener.open(request) 
+
+	results = json.load(response)
+
+	return results
+
+
+def hfSearch(term):
+	base = "http://healthfinder.gov/developer/Search.xml"
 	return "nyi"
 
-def hfSearch():
-	return "nyi"
+def urlBuilder(baseUrl, dict):
+	out = "?%s=%s" % (dict.keys()[0], slugify(dict[dict.keys()[0]]))
 
-def urlBuilder(dict):
-	out = "?" + dict.keys()[0] + "=" + dict[dict.keys()[0]]
+	for i in range(1, len(dict.keys())):
+		out += "&%s=%s" % ( dict.keys()[i], slugify(dict[dict.keys()[i]]) ) 
+	return baseUrl + out
 
-	for i in range(len(dict.keys())):
-		out += "&%s=%s" % ( dict.keys()[i], dict[dict.keys()[i]] ) 
-	return out
+#print urlBuilder("www.kieranisgod.com", { "query":"toast is good", "user":"Kieran McCool" })
 
-print urlBuilder({ "query":"toast is good", "user":"Kieran McCool" })
+d =  bingSearch("")
+f = open("test", "w+")
+for k in d.keys():
+	f.write("%s\t:\n %s" % (k, d[k]))
