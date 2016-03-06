@@ -10,23 +10,23 @@
     <h1><a href="/fhsa/">eHealth</a></h1>
     <div id="header">
         {% block content %}
-            <img src="{{ avatarSrc }}" height=300 width=300>
+            <img src="{{ avatarSrc }}" height=250 width=250>
         {% endblock %}
-        <h2>{{ user.user }}</h2>
     </div>
+    <div id="name"><h2>{{ user.user }}</h2></div>
     <div id="bio">
         <h3>Bio</h3>
         Date of Birth: {{ user.DOB }} <br/>
         Gender: {{ user.gender }}<br/>
-        Email: {{ userorg.email }}
+        Email: {{ userorg.email }}<br/><br/>
     </div>
-    <div id="folder_menu">
-        {% for foo in folder %}
-            {% if foo.user == user.user %}
-                {{ foo.name }} <br/>
-                {{ foo.description }} <br/>
-            {% endif %}
-        {% endfor %}
+    <div id="appearance">
+        <h3>Appearance</h3>
+        <form>
+            <input type="radio" name="appearance" value="default">Default Mode
+            <input type="radio" name="appearance" value="night">Night Time Mode<br/>
+        </form>
+    </div>
     </div>
 </body>
 </html>
