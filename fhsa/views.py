@@ -5,6 +5,7 @@ from fhsa.forms import UserForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
 from identiji import generateAvatar
 from .models import UserFolder, UserProfile, User
+from searchWrap import bingSearch
 import os
 
 @login_required
@@ -20,6 +21,8 @@ def user_page(request):
     return render(request, 'fhsa/user_page.html', {'user': user, 'folder': folder, 'userorg': userorg, 'avatarSrc': avatarSrc})
 
 def index(request):
+    if request.user.is_anonymous():
+        return render(request, 'fhsa/index.html', {})
     user = UserProfile.objects.get(user=request.user)
     avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
     return render(request, 'fhsa/index.html', {"avatarSrc":avatarSrc})
