@@ -28,10 +28,12 @@
         {% else %}
             <h2>Welcome to eHealth</h2>
         {% endif %}
-        <form type="get" action="." style="margin: 0">
-        <input  class="search_box" type="text" name="search_box"  placeholder="Enter Symptoms..." ><br/>
-        <button class="web_search_submit" type="submit" onClick="alert('You clicked the web button');">Web Search</button>
-        <button class="fhsa_search_submit" type="submit" onClick="alert('You clicked the fhsa button');">eHealth Search</button>
+        <form class="form-inline" id="user_form" method="post" action="{% url 'index' %}">
+            {% csrf_token %}
+            <!-- Display the search form elements here -->
+            <input class="form-control" type="text" size="50" name="query" value="" id="query" /><br/>
+            <input class="btn btn-primary" type="submit" name="submit" value="Search" />
+            <br />
         </form>
     </div>
     <div id="footer">

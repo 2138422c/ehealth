@@ -27,6 +27,16 @@ def index(request):
     avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
     return render(request, 'fhsa/index.html', {"avatarSrc":avatarSrc})
 
+def search(request):
+    # This will be our view for searching and showing results
+    result_list = []
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+        if query:
+            # Run our Bing function to get the results list!
+            result_list = bingSearch(query)
+    return render(request, 'fhsa/search.html', {'result_list': result_list})
+
 def folder(request, folder_name_slug):
     context_dict = {}
     try:
