@@ -51,6 +51,8 @@ def search(request):
 
     logged = True
 
+    user = None
+
     try:
         user = UserProfile.objects.get(user=request.user)
     except:
@@ -70,7 +72,7 @@ def search(request):
             formatURL(q["DisplayUrl"]) + " (Source: Bing)", q["Description"]] for q in bingSearch(x)],  
         "hf": lambda x : {False:lambda x : [],True:lambda x : [[formatURL(q["AccessibleVersion"]),  # I'm so sorry for this... (With love from Kieran <3)
             q["Title"] + " (Source : HealthFinder)", q["Sections"][0]["Content"] ] for q in hfSearch(x, 
-                int((date.today() - user.DOB).days / 365.2425), user.gender)]}[logged](x),
+                int((date.today() - user.DOB).days / 365.2425), {"M":"Male","F":"Female"}[user.gender])]}[logged](x),
         "*" : lambda x : apiDict["ml"](x) + apiDict["hf"](x) + apiDict["bs"](x)
     }
     

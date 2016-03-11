@@ -51,11 +51,11 @@ def bingSearch(term):
 
 def hfSearch(term, age, gender, who="someone", pregnant=0):
 	def hfSillyFormatting(s):
-		out = ""
-		for i in s.split(" "):
-			out += "%%22%s" % i
-		out += "%22"
-		return out
+		l = s.split(" ")
+		out = "%%22%s" % l[0]
+		for i in range(1, len(l)):
+			out += "%%20%s" % (l[i])
+		return out + "%22"
 
 	base = "http://healthfinder.gov/developer/Search.json"
 	base = urlBuilder(base, { "keyword":hfSillyFormatting(term), "gender":gender,
@@ -64,6 +64,14 @@ def hfSearch(term, age, gender, who="someone", pregnant=0):
 	request = urllib2.urlopen(base)
 	response = request.read()
 	results = json.loads(stripHtml(response))["Result"]
+
+	print base + "\n\n"
+
+	print str(results) + "\n\n"
+
+
+	if results["Total"] == "0":
+		return []
 	return results["Topics"]
 
 def urlBuilder(baseUrl, dict):
@@ -93,4 +101,4 @@ def testHF():
 	for r in d:
 		f.write(str(r) + "\n\n" )
 
-testBing(); testML(); testHF()
+#testBing(); testML(); testHF()
