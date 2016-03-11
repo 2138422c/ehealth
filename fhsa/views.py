@@ -28,13 +28,10 @@ def index(request):
     return render(request, 'fhsa/index.html', {"avatarSrc":avatarSrc})
 
 def search(request):
-    # This will be our view for searching and showing results
-    result_list = []
-    if request.method == 'POST':
-        query = request.POST['query'].strip()
-        if query:
-            # Run our Bing function to get the results list!
-            result_list = bingSearch(query)
+    # This will be our view for searching and showing results   
+    q = request.GET["query"]
+    if q != "":
+        result_list = [ [q["DisplayUrl"], q["Description"]] for q in bingSearch(q)]
     return render(request, 'fhsa/search.html', {'result_list': result_list})
 
 def folder(request, folder_name_slug):
