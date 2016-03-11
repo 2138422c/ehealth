@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from identiji import generateAvatar
 from .models import UserFolder, UserProfile, User
 from searchWrap import bingSearch
+from .forms import IndexForm
 import os
 
 @login_required
@@ -21,17 +22,31 @@ def user_page(request):
     return render(request, 'fhsa/user_page.html', {'user': user, 'folder': folder, 'userorg': userorg, 'avatarSrc': avatarSrc})
 
 def index(request):
+    if request.method == 'POST':
+        form = IndexForm(request.POST)
+        if form.is_valid():
+            return search(request)
+
     if request.user.is_anonymous():
         return render(request, 'fhsa/index.html', {})
-    user = UserProfile.objects.get(user=request.user)
-    avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
-    return render(request, 'fhsa/index.html', {"avatarSrc":avatarSrc})
+    else:
+        user = UserProfile.objects.get(user=request.user)
+        avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
+        return render(request, 'fhsa/index.html', {"avatarSrc":avatarSrc})
 
-def search(request):
-    # This will be our view for searching and showing results   
-    q = request.GET["query"]
+def search(request, q = ""):
+    def formatURL(s):
+        if s[0:8] == "https://":
+            return s
+        elif s[0:7] == "http://":
+            return s
+        return "http://" + s
+    if "query" in request.GET:
+        q = request.GET["query"]
+    if "query" in request.POST:
+        q = request.POST["query"]
     if q != "":
-        result_list = [ [q["DisplayUrl"], q["Description"]] for q in bingSearch(q)]
+        result_list = [ [formatURL(q["DisplayUrl"]), q["Description"]] for q in bingSearch(q)]
     return render(request, 'fhsa/search.html', {'result_list': result_list})
 
 def folder(request, folder_name_slug):
