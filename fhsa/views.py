@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 from identiji import generateAvatar
 from .models import UserFolder, UserProfile, User
 from searchWrap import bingSearch
-from .forms import IndexForm
 import os
 
 @login_required
