@@ -10,6 +10,9 @@ bingKey = "d0yoBORYWMf3D7h5lT8Bum8iLRnhJg3UFNBQjD636gc"
 def queryFormat(s):
 	return "%%27%s%%27" % slugify(s)
 
+def stripHtml(s):
+	return re.sub('<[^>]*>', '', s)
+
 def medlineSearch(term):
 	base = "https://wsearch.nlm.nih.gov/ws/query"
 	base = urlBuilder(base, { "db":"healthTopics", "term":queryFormat(term)})
@@ -21,6 +24,10 @@ def medlineSearch(term):
 
 	for document in results.iter('document'):
 			out += [{ content.attrib["name"]: content.text for content in document.iter("content") }]
+
+	for d in out:
+		for k in d.keys():
+			d[k] = stripHtml(d[k])
 
 	return out
 
@@ -49,8 +56,6 @@ def hfSearch(term, age, gender, who="someone", pregnant=0):
 			out += "%%22%s" % i
 		out += "%22"
 		return out
-	def stripHtml(s):
-		return re.sub('<[^>]*>', '', s)
 
 	base = "http://healthfinder.gov/developer/Search.json"
 	base = urlBuilder(base, { "keyword":hfSillyFormatting(term), "gender":gender,
@@ -59,7 +64,7 @@ def hfSearch(term, age, gender, who="someone", pregnant=0):
 	request = urllib2.urlopen(base)
 	response = request.read()
 	results = json.loads(stripHtml(response))["Result"]
-	return results
+	return results["Topics"]
 
 def urlBuilder(baseUrl, dict):
 	out = "?%s=%s" % (dict.keys()[0], dict[dict.keys()[0]])
@@ -85,7 +90,7 @@ def testHF():
 	f = open("testHealthFinder.txt", "w+")
 	d = hfSearch("Pain", 19, "male")
 	f.write(str(d))
-#	for k in d.keys():
-#		f.write("%s:\n\n\n\t%s" % (k, d[k]))
+	for r in d:
+		f.write(str(r) + "\n\n" )
 
 testBing(); testML(); testHF()

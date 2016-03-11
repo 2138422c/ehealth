@@ -5,8 +5,9 @@ from fhsa.forms import UserForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
 from identiji import generateAvatar
 from .models import UserFolder, UserProfile, User
-from searchWrap import bingSearch
+from searchWrap import bingSearch, medlineSearch, hfSearch
 import os
+from datetime import date
 
 @login_required
 def home(request):
@@ -33,19 +34,48 @@ def index(request):
         avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
         return render(request, 'fhsa/index.html', {"avatarSrc":avatarSrc})
 
-def search(request, q = ""):
+def search(request):
     def formatURL(s):
         if s[0:8] == "https://":
             return s
         elif s[0:7] == "http://":
             return s
         return "http://" + s
-    if "query" in request.GET:
-        q = request.GET["query"]
-    if "query" in request.POST:
-        q = request.POST["query"]
-    if q != "":
-        result_list = [ [formatURL(q["DisplayUrl"]), q["Description"]] for q in bingSearch(q)]
+
+    def getRequestParam(p):
+        if p in request.GET:
+            return request.GET[p]
+        if p in request.POST:
+            return request.POST[p]
+        return ""
+
+    logged = True
+
+    try:
+        user = UserProfile.objects.get(user=request.user)
+    except:
+        logged = False
+
+    query = getRequestParam("query")
+    print query
+    api = getRequestParam("api")
+
+    if api == "":
+        api = "*"
+
+    apiDict = { 
+        "ml": lambda x :[["", "%s | %s | %s (Source: Medline)" % (q["groupName"], q["title"], q["organizationName"]), 
+            q["FullSummary"] ] for q in medlineSearch(x) ],
+        "bs": lambda x : [[formatURL(q["DisplayUrl"]), 
+            formatURL(q["DisplayUrl"]) + " (Source: Bing)", q["Description"]] for q in bingSearch(x)],  
+        "hf": lambda x : {False:lambda x : [],True:lambda x : [[formatURL(q["AccessibleVersion"]),  # I'm so sorry for this... (With love from Kieran <3)
+            q["Title"] + " (Source : HealthFinder)", q["Sections"][0]["Content"] ] for q in hfSearch(x, 
+                int((date.today() - user.DOB).days / 365.2425), user.gender)]}[logged](x),
+        "*" : lambda x : apiDict["ml"](x) + apiDict["hf"](x) + apiDict["bs"](x)
+    }
+    
+    result_list = apiDict[api](query)
+
     return render(request, 'fhsa/search.html', {'result_list': result_list})
 
 def folder(request, folder_name_slug):
