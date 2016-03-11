@@ -18,7 +18,6 @@ def user_page(request):
     user = UserProfile.objects.get(user=request.user)
     userorg = User.objects.get(username = request.user)
     avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
-    print avatarSrc
     return render(request, 'fhsa/user_page.html', {'user': user, 'folder': folder, 'userorg': userorg, 'avatarSrc': avatarSrc})
 
 def index(request):
@@ -59,7 +58,6 @@ def search(request):
         logged = False
 
     query = getRequestParam("query")
-    print query
     api = getRequestParam("api")
 
     if api == "":

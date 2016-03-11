@@ -65,11 +65,6 @@ def hfSearch(term, age, gender, who="someone", pregnant=0):
 	response = request.read()
 	results = json.loads(stripHtml(response))["Result"]
 
-	print base + "\n\n"
-
-	print str(results) + "\n\n"
-
-
 	if results["Total"] == "0":
 		return []
 	return results["Topics"]
