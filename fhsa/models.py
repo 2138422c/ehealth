@@ -45,9 +45,13 @@ class Result(models.Model):
     """
     Results from APIs
     """
-    name = models.URLField(null=True)
+    title = models.CharField(max_length=128, null=True)
     description = models.CharField(max_length=128, null=True)
-    folders = models.ForeignKey(UserFolder, null=True)
+    url = models.URLField(primary_key = True)
+    source = models.CharField(max_length=50, null=True)
+    sentimentality = models.IntegerField(default=0)
+    readability = models.IntegerField(default=0)
+    sensitivity = models.IntegerField(default=0)
 
     def __unicode__(self):
-        return self.name
+        return self.title

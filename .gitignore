@@ -82,3 +82,6 @@ target/
 
 # identiji.py avatars
 avatars/
+
+# test output - speeds up commits
+test*.txt
