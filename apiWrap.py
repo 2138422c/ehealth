@@ -107,5 +107,3 @@ def testHF(query, age, gender, who="someone", pregnant=0):
 	d = hfSearch(query, age, gender, who=who, pregnant=pregnant)
 	f.write(str(d))
 	return d
-
-#testBing(); testML(); testHF()

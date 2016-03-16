@@ -126,5 +126,5 @@ def register(request):
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
 
 def medline(request):
-    getRequestParam("r",request)
+    return HttpResponse("Not yet implemented")
     

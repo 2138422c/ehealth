@@ -8,6 +8,7 @@ from apiWrap import *
 from django.template.defaultfilters import slugify
 import httplib
 
+cache = { }
 
 def titleFromHtml(url):
 	request = urllib2.urlopen(url)
@@ -15,11 +16,6 @@ def titleFromHtml(url):
 	tt = response.split('<title>')[1]
 	title = tt.split('</title>')[0]
 	return title
-
-def calculate_age(born):
-    today = date.today()
-    # Second boolean evaluation casts to 0 or 1 if used as int in python.
-    return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
 def formatURL(s):
         if s[0:8] == "https://":
@@ -30,32 +26,42 @@ def formatURL(s):
 
 def doSearch(query, api="*", user=None):
 
-	if api == "medline":
-		l = medline(query)
-	elif api == "healthfinder" and user != None:
-		l = healthfinder(query, user=user)
-	elif api == "bing":
-		l = bing(query)
-	elif api == "*":
-		l = medline(query) + healthfinder(query, user=user)  + bing(query)
+	if api != "healthfinder" and (cache.get(query, None) == None or (date.today() - cache.get(query)[1]).days > 3):
+
+		if api == "medline":
+			l = medline(query)
+		elif api == "bing":
+			l = bing(query)
+		elif api == "*":
+			l = medline(query) + bing(query)
+
+		cache[query] = [ l, date.today() ]
+	elif api != "healthfinder":
+		print "loading results from cache..."
+		l = cache.get(query)[0]
+
+	if api == "healthfinder" or api == "*":
+		l += healthfinder(query, user=user)
+
 	l.sort(key=lambda x : x.sensitivity, reverse=True)
+
 	return l
 
 def formatObject(url, title, description, source):
 		try:
 			r = Result.objects.get(url=url)
 		except:
-			r = Result.objects.create(url=url)
+			r = Result(url=url)
 
 		r.title = title + " (Source: %s)" % source
 		r.description = description
 		r.source = source
-		senseData = get_sensitivity_rating(description)
+		senseData = { "sentimentality":10,"readability":10,"sensitivity":10}
+		#senseData = get_sensitivity_rating(description)
 		r.sentimentality = senseData["sentimentality"]
 		r.readability = senseData["readability"]
 		r.sensitivity = senseData["sensitivity"]
 		r.retrieved = date.today()
-
 		return r
 
 def medline(query):
@@ -71,8 +77,15 @@ def medline(query):
 		results += [r]
 	return results
 
+def calculate_age(born):
+	today = date.today()
+	# Second boolean evaluation casts to 0 or 1 if used as int in python.
+	return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+
 def healthfinder(query, user):
 	results = []
+	if user == None:
+		return []
 	for q in hfSearch(query, 
                 calculate_age(user.DOB), 
                 {"M":"Male","F":"Female"}[user.gender]):
