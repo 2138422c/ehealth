@@ -6,6 +6,15 @@ from datetime import date
 from sensitivity import get_sensitivity_rating
 from apiWrap import *
 from django.template.defaultfilters import slugify
+import httplib
+
+
+def titleFromHtml(url):
+	request = urllib2.urlopen(url)
+	response = request.read()
+	tt = response.split('<title>')[1]
+	title = tt.split('</title>')[0]
+	return title
 
 def calculate_age(born):
     today = date.today()
@@ -19,40 +28,18 @@ def formatURL(s):
             return s
         return "http://" + s
 
-def loadCache():
-	if os.path.isfile("cache.pickle"):
-		searchCache = pickle.load("cache.pickle")
-	else:
-		f = open("cache.pickle", "w+")
-		f.write("")
-		f.close()
-		searchCache = {}
-
 def doSearch(query, api="*", user=None):
 
 	if api == "medline":
-		return medline(query)
+		l = medline(query)
 	elif api == "healthfinder" and user != None:
-		return healthfinder(query, user=user)
+		l = healthfinder(query, user=user)
 	elif api == "bing":
-		return bing(query)
+		l = bing(query)
 	elif api == "*":
-		print "nyi"
-	return []
-
-"""
-    apiDict = { 
-        "ml": lambda x :[["", "%s | %s | %s (Source: Medline)" % (q["groupName"], q["title"], q["organizationName"]), 
-             ] for q in medlineSearch(x) ],
-        "bs": lambda x : [[formatURL(q["DisplayUrl"]), 
-            formatURL(q["DisplayUrl"]) + " (Source: Bing)", q["Description"]] for q in bingSearch(x)],  
-        "hf": lambda x : {False:lambda x : [],True:lambda x : [[formatURL(q["AccessibleVersion"]),  # I'm so sorry for this... (With love from Kieran <3)
-            q["Title"] + " (Source : HealthFinder)", q["Sections"][0]["Content"] ] for q in hfSearch(x, 
-                int((date.today() - user.DOB).days / 365.2425), {"M":"Male","F":"Female"}[user.gender])]}[logged](x),
-        "*" : lambda x : apiDict["ml"](x) + apiDict["hf"](x) + apiDict["bs"](x)
-    }
-
-   """
+		l = medline(query) + healthfinder(query, user=user)  + bing(query)
+	l.sort(key=lambda x : x.sensitivity, reverse=True)
+	return l
 
 def medline(query):
 	results = []
@@ -100,12 +87,13 @@ def healthfinder(query, user):
 		results += [r]
 	return results
 
-
-
 def bing(query):
 	results = []
 	for q in bingSearch(query):
-		title = formatURL(q["DisplayUrl"]) + " (Source: Bing)"		
+		try:
+			title = titleFromHtml(formatURL(q["DisplayUrl"])) + " (Source: Bing)"		
+		except:
+			title = formatURL(q["DisplayUrl"])
 		url = formatURL(q["DisplayUrl"])
 
 		try:

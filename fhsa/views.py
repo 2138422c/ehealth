@@ -61,7 +61,7 @@ def search(request):
     query = getRequestParam("query")
     api = getRequestParam("api")
 
-    api = "healthfinder"
+    api = "*"
 
     result_list = doSearch(query, api=api, user=user)
 
