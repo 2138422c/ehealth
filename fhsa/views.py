@@ -61,8 +61,7 @@ def search(request):
     query = getRequestParam("query")
     api = getRequestParam("api")
 
-    """WE'RE ONLY USING MEDLINE JUST NOW"""
-    api = "medline"
+    api = "bing"
 
     result_list = doSearch(query, api)
 

@@ -80,9 +80,23 @@ def healthfinder(query, user):
 	print "nyi"
 
 def bing(query):
-	print "nyi"
+	results = []
+	for q in bingSearch(query):
+		title = formatURL(q["DisplayUrl"]) + " (Source: Bing)"		
+		url = formatURL(q["DisplayUrl"])
 
-def test():
-	print "hi"
-	print [ r.title for r in medline("pain") ]
+		try:
+			r = Result.objects.get(url=url)
+		except:
+			r = Result.objects.create(url=url)
+
+		r.title = title
+		r.description = q["Description"]
+		r.source = "bing"
+		senseData = get_sensitivity_rating(q["Description"])
+		r.sentimentality = senseData["sentimentality"]
+		r.readability = senseData["readability"]
+		r.sensitivity = senseData["sensitivity"]
+		results += [r]
+	return results
 	
