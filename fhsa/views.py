@@ -61,9 +61,9 @@ def search(request):
     query = getRequestParam("query")
     api = getRequestParam("api")
 
-    api = "bing"
+    api = "healthfinder"
 
-    result_list = doSearch(query, api)
+    result_list = doSearch(query, api=api, user=user)
 
     return render(request, 'fhsa/search.html', {'result_list': result_list})
 

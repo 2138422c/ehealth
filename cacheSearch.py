@@ -33,7 +33,7 @@ def doSearch(query, api="*", user=None):
 	if api == "medline":
 		return medline(query)
 	elif api == "healthfinder" and user != None:
-		return healthfinder(query)
+		return healthfinder(query, user=user)
 	elif api == "bing":
 		return bing(query)
 	elif api == "*":
@@ -77,7 +77,30 @@ def medline(query):
 	return results
 
 def healthfinder(query, user):
-	print "nyi"
+	results = []
+	for q in hfSearch(query, 
+                calculate_age(user.DOB), 
+                {"M":"Male","F":"Female"}[user.gender]):
+
+		title = q["Title"] + " (Source : HealthFinder)"		
+		url = formatURL(q["AccessibleVersion"])
+
+		try:
+			r = Result.objects.get(url=url)
+		except:
+			r = Result.objects.create(url=url)
+
+		r.title = title
+		r.description = q["Sections"][0]["Content"]
+		r.source = "healthfinder"
+		senseData = get_sensitivity_rating(q["Sections"][0]["Content"])
+		r.sentimentality = senseData["sentimentality"]
+		r.readability = senseData["readability"]
+		r.sensitivity = senseData["sensitivity"]
+		results += [r]
+	return results
+
+
 
 def bing(query):
 	results = []
