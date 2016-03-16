@@ -9,6 +9,13 @@ from cacheSearch import doSearch
 import os
 from datetime import date
 
+def getRequestParam(p,request):
+    if p in request.GET:
+        return request.GET[p]
+    if p in request.POST:
+        return request.POST[p]
+    return ""
+
 
 @login_required
 def home(request):
@@ -42,13 +49,6 @@ def search(request):
             return s
         return "http://" + s
 
-    def getRequestParam(p):
-        if p in request.GET:
-            return request.GET[p]
-        if p in request.POST:
-            return request.POST[p]
-        return ""
-
     logged = True
 
     user = None
@@ -58,8 +58,8 @@ def search(request):
     except:
         logged = False
 
-    query = getRequestParam("query")
-    api = getRequestParam("api")
+    query = getRequestParam("query", request)
+    api = getRequestParam("api", request)
 
     api = "*"
 
@@ -124,3 +124,7 @@ def register(request):
     return render(request,
             'fhsa/register.html',
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
+
+def medline(request):
+    getRequestParam("r",request)
+    

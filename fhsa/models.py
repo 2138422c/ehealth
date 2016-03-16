@@ -52,6 +52,7 @@ class Result(models.Model):
     sentimentality = models.IntegerField(default=0)
     readability = models.IntegerField(default=0)
     sensitivity = models.IntegerField(default=0)
+    retrieved = models.DateField(null=True)
 
     def __unicode__(self):
         return self.title

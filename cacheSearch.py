@@ -41,25 +41,33 @@ def doSearch(query, api="*", user=None):
 	l.sort(key=lambda x : x.sensitivity, reverse=True)
 	return l
 
-def medline(query):
-	results = []
-	for q in medlineSearch(query):
-		title = "%s | %s | %s" % (q["groupName"], q["title"], q["organizationName"])		
-		url = "medline/%s" % slugify(title)
-
+def formatObject(url, title, description, source):
 		try:
 			r = Result.objects.get(url=url)
 		except:
 			r = Result.objects.create(url=url)
 
-		r.title = title
-		r.description = q["FullSummary"]
-		r.source = "medline"
-		url = ""
-		senseData = get_sensitivity_rating(q["FullSummary"])
+		r.title = title + " (Source: %s)" % source
+		r.description = description
+		r.source = source
+		senseData = get_sensitivity_rating(description)
 		r.sentimentality = senseData["sentimentality"]
 		r.readability = senseData["readability"]
 		r.sensitivity = senseData["sensitivity"]
+		r.retrieved = date.today()
+
+		return r
+
+def medline(query):
+	results = []
+	for q in medlineSearch(query):
+		
+		title = "%s | %s | %s" % (q["groupName"], q["title"], q["organizationName"])		
+		url = "medline/?r=%s" % title
+		description = q["FullSummary"]
+
+		r = formatObject(url, title, description, "MedLine")
+
 		results += [r]
 	return results
 
@@ -71,43 +79,26 @@ def healthfinder(query, user):
 
 		title = q["Title"] + " (Source : HealthFinder)"		
 		url = formatURL(q["AccessibleVersion"])
+		description = q["Sections"][0]["Content"]
+		
+		r = formatObject(url, title, description, "HealthFinder")
 
-		try:
-			r = Result.objects.get(url=url)
-		except:
-			r = Result.objects.create(url=url)
-
-		r.title = title
-		r.description = q["Sections"][0]["Content"]
-		r.source = "healthfinder"
-		senseData = get_sensitivity_rating(q["Sections"][0]["Content"])
-		r.sentimentality = senseData["sentimentality"]
-		r.readability = senseData["readability"]
-		r.sensitivity = senseData["sensitivity"]
 		results += [r]
 	return results
 
 def bing(query):
 	results = []
 	for q in bingSearch(query):
+
+		url = formatURL(q["DisplayUrl"])
 		try:
-			title = titleFromHtml(formatURL(q["DisplayUrl"])) + " (Source: Bing)"		
+			title = titleFromHtml(formatURL(url))		
 		except:
 			title = formatURL(q["DisplayUrl"])
-		url = formatURL(q["DisplayUrl"])
+		description = q["Description"]
 
-		try:
-			r = Result.objects.get(url=url)
-		except:
-			r = Result.objects.create(url=url)
+		r = formatObject(url, title, description, "Bing")
 
-		r.title = title
-		r.description = q["Description"]
-		r.source = "bing"
-		senseData = get_sensitivity_rating(q["Description"])
-		r.sentimentality = senseData["sentimentality"]
-		r.readability = senseData["readability"]
-		r.sensitivity = senseData["sensitivity"]
 		results += [r]
 	return results
 	
