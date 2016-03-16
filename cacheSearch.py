@@ -56,8 +56,7 @@ def formatObject(url, title, description, source):
 		r.title = title + " (Source: %s)" % source
 		r.description = description
 		r.source = source
-		senseData = { "sentimentality":10,"readability":10,"sensitivity":10}
-		#senseData = get_sensitivity_rating(description)
+		senseData = get_sensitivity_rating(description)
 		r.sentimentality = senseData["sentimentality"]
 		r.readability = senseData["readability"]
 		r.sensitivity = senseData["sensitivity"]
