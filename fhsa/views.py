@@ -63,17 +63,17 @@ def search(request):
     if api == "":
         api = "*"
 
-    apiDict = { 
-        "ml": lambda x :[["", "%s | %s | %s (Source: Medline)" % (q["groupName"], q["title"], q["organizationName"]), 
+    apiDict = {
+        "ml": lambda x :[["", "%s | %s | %s (Source: Medline)" % (q["groupName"], q["title"], q["organizationName"]),
             q["FullSummary"] ] for q in medlineSearch(x) ],
-        "bs": lambda x : [[formatURL(q["DisplayUrl"]), 
-            formatURL(q["DisplayUrl"]) + " (Source: Bing)", q["Description"]] for q in bingSearch(x)],  
+        "bs": lambda x : [[formatURL(q["DisplayUrl"]),
+            formatURL(q["DisplayUrl"]) + " (Source: Bing)", q["Description"]] for q in bingSearch(x)],
         "hf": lambda x : {False:lambda x : [],True:lambda x : [[formatURL(q["AccessibleVersion"]),  # I'm so sorry for this... (With love from Kieran <3)
-            q["Title"] + " (Source : HealthFinder)", q["Sections"][0]["Content"] ] for q in hfSearch(x, 
+            q["Title"] + " (Source : HealthFinder)", q["Sections"][0]["Content"] ] for q in hfSearch(x,
                 int((date.today() - user.DOB).days / 365.2425), {"M":"Male","F":"Female"}[user.gender])]}[logged](x),
         "*" : lambda x : apiDict["ml"](x) + apiDict["hf"](x) + apiDict["bs"](x)
     }
-    
+
     result_list = apiDict[api](query)
 
     return render(request, 'fhsa/search.html', {'result_list': result_list})

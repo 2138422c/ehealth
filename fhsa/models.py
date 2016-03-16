@@ -20,6 +20,7 @@ class UserProfile(models.Model):
         (FEMALE, 'Female'),
     )
     gender = models.CharField(max_length=1, choices=GENDERS)
+
     def __unicode__(self):
         return self.user.username
 
@@ -32,7 +33,7 @@ class UserFolder(models.Model):
     user = models.ForeignKey(UserProfile, null=True)
     id = models.AutoField(primary_key=True)
     slug = models.SlugField()
-    
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(UserFolder, self).save(*args, **kwargs)
@@ -44,4 +45,9 @@ class Result(models.Model):
     """
     Results from APIs
     """
-    
+    name = models.URLField(null=True)
+    description = models.CharField(max_length=128, null=True)
+    folders = models.ForeignKey(UserFolder, null=True)
+
+    def __unicode__(self):
+        return self.name
