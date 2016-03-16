@@ -1,3 +1,6 @@
 Django==1.9.2
+django-registration==2.0.4
+nltk==3.2
 Pillow==3.1.1
-wheel==0.29.0
+textblob==0.11.1
+textstat==0.2
