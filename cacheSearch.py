@@ -47,22 +47,24 @@ def doSearch(query, api="*", user=None):
 	else:
 		return results(query, api=api, user=None)
 
-def formatObject(url, title, description, source):
+def formatObject(url, title, description, source, shortDescription=""):
 	senseData = get_sensitivity_rating(description)
-	return { "title": title + " (Source: %s)" % source, "description" : description, "source":source,
+	return { "url":url, "title": title + " (Source: %s)" % source, 
+		"description" : description, "source":source, 
+		"shortDescription":{True:description, False:shortDescription}[shortDescription == ""],
 		"sentimentality": senseData["sentimentality"], "readability": senseData["readability"],
 		"sensitivity": senseData["sensitivity"]
 		}
 
 def medline(query):
 	results = []
-	for q in medlineSearch(query):
+	for q in medlineSearch(query, debug=True):
 		
 		title = "%s | %s | %s" % (q["groupName"], q["title"], q["organizationName"])		
 		url = "medline/?r=%s" % title
 		description = q["FullSummary"]
 
-		r = formatObject(url, title, description, "MedLine")
+		r = formatObject(url, title, description, "MedLine", shortDescription = q["snippet"])
 
 		results += [r]
 	return results
