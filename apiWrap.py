@@ -89,6 +89,7 @@ def urlBuilder(baseUrl, dict):
 
 #print urlBuilder("www.kieranisgod.com", { "query":"toast is good", "user":"Kieran McCool" })
 def testBing(query):
+	print "Hi"
 	d =  bingSearch(query) # I was eating those at the time of writing.
 	f = open("testBing.txt", "w+")
 	for r in d:

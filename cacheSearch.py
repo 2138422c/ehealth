@@ -8,14 +8,8 @@ from apiWrap import *
 from django.template.defaultfilters import slugify
 import httplib
 
+USE_CACHE = True
 cache = { }
-
-def titleFromHtml(url):
-	request = urllib2.urlopen(url)
-	response = request.read()
-	tt = response.split('<title>')[1]
-	title = tt.split('</title>')[0]
-	return title
 
 def formatURL(s):
         if s[0:8] == "https://":
@@ -25,43 +19,40 @@ def formatURL(s):
         return "http://" + s
 
 def doSearch(query, api="*", user=None):
-
-	if api != "healthfinder" and (cache.get(query, None) == None or (date.today() - cache.get(query)[1]).days > 3):
-
+	def results(query, api="*", user=None):
+		l = []
 		if api == "medline":
 			l = medline(query)
+		elif api == "healthfinder":
+			l = healthfinder(query, user=user)
 		elif api == "bing":
-			l = bing(query)
+			l = bing(query) 
 		elif api == "*":
-			l = medline(query) + bing(query)
+			for api in [ "medline", "healthfinder", "bing" ]:
+				l += results(query, api=api, user=user) 
 
-		cache[query] = [ l, date.today() ]
-	elif api != "healthfinder":
-		print "loading results from cache..."
-		l = cache.get(query)[0]
+		l.sort(key=lambda x : x["sensitivity"], reverse=True)
 
-	if api == "healthfinder" or api == "*":
-		l += healthfinder(query, user=user)
+		if USE_CACHE:
+			cache[query] = [ l, date.today() ]
 
-	l.sort(key=lambda x : x.sensitivity, reverse=True)
+		return l
 
-	return l
+	def haveCache():
+		if not USE_CACHE:
+			return False
+		return query in cache and (date.today() - cache.get(query)[1]).days < 3
+	if haveCache():
+		return cache[query][0]
+	else:
+		return results(query, api=api, user=None)
 
 def formatObject(url, title, description, source):
-		try:
-			r = Result.objects.get(url=url)
-		except:
-			r = Result(url=url)
-
-		r.title = title + " (Source: %s)" % source
-		r.description = description
-		r.source = source
-		senseData = get_sensitivity_rating(description)
-		r.sentimentality = senseData["sentimentality"]
-		r.readability = senseData["readability"]
-		r.sensitivity = senseData["sensitivity"]
-		r.retrieved = date.today()
-		return r
+	senseData = get_sensitivity_rating(description)
+	return { "title": title + " (Source: %s)" % source, "description" : description, "source":source,
+		"sentimentality": senseData["sentimentality"], "readability": senseData["readability"],
+		"sensitivity": senseData["sensitivity"]
+		}
 
 def medline(query):
 	results = []
@@ -101,13 +92,9 @@ def healthfinder(query, user):
 def bing(query):
 	results = []
 	for q in bingSearch(query):
-
-		url = formatURL(q["DisplayUrl"])
-		try:
-			title = titleFromHtml(formatURL(url))		
-		except:
-			title = formatURL(q["DisplayUrl"])
+		title = q["Title"]
 		description = q["Description"]
+		url = formatURL(q["DisplayUrl"])
 
 		r = formatObject(url, title, description, "Bing")
 

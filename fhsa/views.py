@@ -61,10 +61,11 @@ def search(request):
     query = getRequestParam("query", request)
     api = getRequestParam("api", request)
 
-    api = "*"
+    if api not in [ "medline", "bing", "healthfinder" ]:
+        api = "*"
 
     result_list = doSearch(query, api=api, user=user)
-
+    
     return render(request, 'fhsa/search.html', {'result_list': result_list})
 
 def folder(request, folder_name_slug):
