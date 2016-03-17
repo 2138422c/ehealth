@@ -1,0 +1,633 @@
+(dp0
+Vpain
+p1
+(lp2
+(lp3
+(dp4
+S'source'
+p5
+S'MedLine'
+p6
+sS'sentimentality'
+p7
+F40.625
+sS'description'
+p8
+S'Pain is a feeling triggered in the nervous system. Pain may be sharp or dull.  It may come and go, or it may be constant. You may feel pain in one area of your body, such as your back, abdomen or chest or you may feel pain all over, such as when your muscles ache from the flu.Pain can be helpful in diagnosing a problem.  Without pain, you might seriously hurt yourself without knowing it, or you might not realize you have a medical problem that needs treatment.  Once you take care of the problem, pain usually goes away.  However, sometimes pain goes on for weeks, months or even years.  This is called chronic pain.  Sometimes chronic pain is due to an ongoing cause, such as cancer or arthritis. Sometimes the cause is unknown.Fortunately, there are many ways to treat pain.  Treatment varies depending on the cause of pain.  Pain relievers, acupuncture and sometimes surgery are helpful.'
+p9
+sS'title'
+p10
+S'Symptoms | Pain | National Library of Medicine (Source: MedLine)'
+p11
+sS'url'
+p12
+S'medline/?r=Symptoms | Pain | National Library of Medicine'
+p13
+sS'sensitivity'
+p14
+F58.9275
+sS'shortDescription'
+p15
+S' Pain is a feeling triggered in the nervous system. Pain may be sharp or dull.  It may come and go, or it may be constant. You may feel pain in one area of  ... '
+p16
+sS'readability'
+p17
+F77.23
+sa(dp18
+g5
+g6
+sg7
+F34.6111111111111
+sg8
+S'If you\'ve ever groaned, "Oh, my aching back!", you are not alone. Back pain is one of the most common medical problems, affecting 8 out of 10 people at some point during their lives. Back pain can range from a dull, constant ache to a sudden, sharp pain. \nAcute back pain comes on suddenly and usually lasts from a few days to a few weeks. Back pain is called chronic if it lasts for more than three months.Most back pain goes away on its own, though it may take awhile. Taking over-the-counter pain relievers and resting can help. However, staying in bed for more than 1 or 2 days can make it worse. If your back pain is severe or doesn\'t improve after three days, you should call your health care provider.  You should also get medical attention if you have back pain following an injury.Treatment for back pain depends on what kind of pain you have, and what is causing it. It may include hot or cold packs, exercise, medicines, injections, complementary treatments, and sometimes surgery.NIH: National Institute of Arthritis and Musculoskeletal and Skin Diseases'
+p19
+sg10
+S'Brain and Nerves | Back Pain | National Library of Medicine (Source: MedLine)'
+p20
+sg12
+S'medline/?r=Brain and Nerves | Back Pain | National Library of Medicine'
+p21
+sg14
+F54.90555555555555
+sg15
+S' If you\'ve ever groaned, "Oh, my aching back!", you are not alone. Back pain is one of the most common medical problems, affecting 8 out of 10 people at some  ... '
+p22
+sg17
+F75.2
+sa(dp23
+g5
+g6
+sg7
+F59.146825396825385
+sg8
+S"Pain relievers are medicines that reduce or relieve headaches, sore muscles, arthritis, or other aches and pains.  There are many different pain medicines, and each one has advantages and risks. Some types of pain respond better to certain medicines than others. Each person may also have a slightly different response to a pain reliever. Over-the-counter (OTC) medicines are good for many types of pain. There are two main types of OTC pain medicines: acetaminophen (Tylenol) and nonsteroidal anti-inflammatory drugs (NSAIDs). Aspirin, naproxen (Aleve), and ibuprofen (Advil, Motrin) are examples of OTC NSAIDs.If OTC medicines don't relieve your pain, your doctor may prescribe something stronger. Many NSAIDs are also available at higher prescription doses. The most powerful pain relievers are narcotics. They are very effective, but they can sometimes have serious side effects. Because of the risks, you must use them only under a doctor's supervision.There are many things you can do to help ease pain. Pain relievers are just one part of a pain treatment plan."
+p24
+sg10
+S'Drug Therapy | Pain Relievers | National Library of Medicine (Source: MedLine)'
+p25
+sg12
+S'medline/?r=Drug Therapy | Pain Relievers | National Library of Medicine'
+p26
+sg14
+F55.49841269841269
+sg15
+S' Pain relievers are medicines that reduce or relieve headaches, sore muscles, arthritis, or other aches and pains.  There are many different pain medicines,  ... '
+p27
+sg17
+F51.85
+sa(dp28
+g5
+g6
+sg7
+F55.88235294117647
+sg8
+S"Your abdomen extends from below your chest to your groin. Some people call it the stomach, but your abdomen contains many other important organs. Pain in the abdomen can come from any one of them. The pain may start somewhere else, such as your chest. Severe pain doesn't always mean a serious problem. Nor does mild pain mean a problem is not serious. Call your healthcare provider if mild pain lasts a week or more or if you have pain with other symptoms. Get medical help immediately if\tYou have abdominal pain that is sudden and sharpYou also have pain in your chest, neck or shoulder \tYou're vomiting blood or have blood in your stool \tYour abdomen is stiff, hard and tender to touch You can't move your bowels, especially if you're also vomiting "
+p29
+sg10
+S'Symptoms | Abdominal Pain | National Library of Medicine (Source: MedLine)'
+p30
+sg12
+S'medline/?r=Symptoms | Abdominal Pain | National Library of Medicine'
+p31
+sg14
+F64.02117647058823
+sg15
+S' Your abdomen extends from below your chest to your groin. Some people call it the stomach, but your abdomen contains many other important organs. Pain in  ... '
+p32
+sg17
+F72.16
+sa(dp33
+g5
+g6
+sg7
+F56.29166666666667
+sg8
+S'Having a pain in your chest can be scary.  It does not always mean that you are having a heart attack.  There can be many other causes, includingOther heart problems, such as anginaPanic attacksDigestive problems, such as heartburn or esophagus disordersSore musclesLung diseases, such as pneumonia, pleurisy, or pulmonary embolismCostochondritis - an inflammation of joints in your chestSome of these problems can be serious.  Get immediate medical care if you have chest pain that does not go away, crushing pain or pressure in the chest, or chest pain along with nausea, sweating, dizziness or shortness of breath. Treatment depends on the cause of the pain.'
+p34
+sg10
+S'Symptoms | Chest Pain | National Library of Medicine (Source: MedLine)'
+p35
+sg12
+S'medline/?r=Symptoms | Chest Pain | National Library of Medicine'
+p36
+sg14
+F53.73583333333333
+sg15
+S' Having a pain in your chest can be scary.  It does not always mean that you are having a heart attack.  There can be many other causes, including Other heart  ... '
+p37
+sg17
+F51.18
+sa(dp38
+g5
+g6
+sg7
+F46.979166666666664
+sg8
+S'Pain is a feeling set off in the nervous system. Acute pain lets you know that you may be injured or have a problem you need to take care of. Chronic pain is different.  The pain signals go on for weeks, months, or even years. The original cause may have been an injury or infection. There may be an ongoing cause of pain, such as arthritis or cancer. But in some cases there is no clear cause.Problems that cause chronic pain includeHeadacheLow back strainCancerArthritisPain from nerve damageChronic pain usually cannot be cured. But treatments can help. They include medicines, acupuncture, electrical stimulation and surgery. Other treatments include psychotherapy, relaxation and meditation therapy, biofeedback, and behavior modification. NIH: National Institute of Neurological Disorders and Stroke'
+p39
+sg10
+S'Symptoms | Chronic Pain | National Library of Medicine (Source: MedLine)'
+p40
+sg12
+S'medline/?r=Symptoms | Chronic Pain | National Library of Medicine'
+p41
+sg14
+F49.92458333333333
+sg15
+S' Pain is a feeling set off in the nervous system. Acute pain lets you know that you may be injured or have a problem you need to take care of. Chronic pain  ... '
+p42
+sg17
+F52.87
+sa(dp43
+g5
+g6
+sg7
+F47.43506493506493
+sg8
+S'Complex regional pain syndrome (CRPS) is a chronic pain condition. It causes intense pain, usually in the arms, hands, legs, or feet. It may happen after an injury, either to a nerve or to tissue in the affected area. Rest and time may only make it worse.Symptoms in the affected area areDramatic changes in skin temperature, color, or textureIntense burning painExtreme skin sensitivitySwelling and stiffness in affected jointsDecreased ability to move the affected body partThe cause of CRPS is unknown. There is no specific diagnostic test. Your doctor will diagnose CRPS based on your signs and symptoms.There is no cure. It can get worse over time, and may spread to other parts of the body. Occasionally it goes away, either temporarily or for good. Treatment focuses on relieving the pain, and can include medicines, physical therapy, and nerve blocks.NIH: National Institute of Neurological Disorders and Stroke'
+p44
+sg10
+S'Brain and Nerves | Complex Regional Pain Syndrome | National Library of Medicine (Source: MedLine)'
+p45
+sg12
+S'medline/?r=Brain and Nerves | Complex Regional Pain Syndrome | National Library of Medicine'
+p46
+sg14
+F49.137532467532466
+sg15
+S' Complex regional pain syndrome (CRPS) is a chronic pain condition. It causes intense pain, usually in the arms, hands, legs, or feet. It may happen after an injury,  ... '
+p47
+sg17
+F50.84
+sa(dp48
+g5
+g6
+sg7
+F34.583333333333336
+sg8
+S"Pelvic pain occurs mostly in the lower abdomen area. The pain might be steady, or it might come and go. If the pain is severe, it might get in the way of your daily activities.If you're a woman, you might feel a dull pain during your period. It could also happen during sex. Pelvic pain can be a sign that there is a problem with one of the organs in your pelvic area, such as the uterus, ovaries, fallopian tubes, cervix or vagina. It could also be a symptom of infection, or a problem with the urinary tract, lower intestines, rectum, muscle or bone. If you're a man, the cause is often a problem with the prostate.You might have to undergo a lot of medical tests to find the cause of the pain. The treatment will depend on the cause, how bad the pain is and how often it occurs.NIH: National Institute of Child Health and Human Development"
+p49
+sg10
+S'Female Reproductive System | Pelvic Pain | National Library of Medicine (Source: MedLine)'
+p50
+sg12
+S'medline/?r=Female Reproductive System | Pelvic Pain | National Library of Medicine'
+p51
+sg14
+F54.38666666666667
+sg15
+S' Pelvic pain occurs mostly in the lower abdomen area. The pain might be steady, or it might come and go. If the pain is severe, it might get in the way of your  ... '
+p52
+sg17
+F74.19
+sa(dp53
+g5
+g6
+sg7
+F63.71212121212122
+sg8
+S"Interstitial cystitis (IC) is a condition that causes discomfort or pain in the bladder and a need to urinate frequently and urgently. It is far more common in women than in men. The symptoms vary from person to person. Some people may have pain without urgency or frequency. Others have urgency and frequency without pain. Women's symptoms often get worse during their periods. They may also have pain with sexual intercourse.The cause of IC isn't known. There is no one test to tell if you have it.  Doctors often run tests to rule out other possible causes of symptoms. There is no cure for IC, but treatments can help most people feel better. They includeDistending, or inflating, the bladderBathing the inside of the bladder with a drug solutionOral medicinesElectrical nerve stimulationPhysical therapyLifestyle changesBladder trainingIn rare cases, surgeryNIH: National Institute of Diabetes and Digestive and Kidney Diseases"
+p54
+sg10
+S'Kidneys and Urinary System | Interstitial Cystitis | National Library of Medicine (Source: MedLine)'
+p55
+sg12
+S'medline/?r=Kidneys and Urinary System | Interstitial Cystitis | National Library of Medicine'
+p56
+sg14
+F57.27606060606061
+sg15
+S' ... IC) is a condition that causes discomfort or pain in the bladder and a need to urinate  ... from person to person. Some people may have pain without urgency or frequency. Others have urgency and  ... '
+p57
+sg17
+F50.84
+sa(dp58
+g5
+g6
+sg7
+F46.92857142857143
+sg8
+S'Any part of your neck - muscles, bones, joints, tendons, ligaments, or nerves - can cause neck problems. Neck pain is very common. Pain may also come from your shoulder, jaw, head, or upper arms. Muscle strain or tension often causes neck pain. The problem is usually overuse, such as from sitting at a computer for too long.  Sometimes you can strain your neck muscles from sleeping in an awkward position or overdoing it during exercise. Falls or accidents, including car accidents, are another common cause of neck pain.  Whiplash, a soft tissue injury to the neck, is also called neck sprain or strain.Treatment depends on the cause, but may include applying ice, taking pain relievers, getting physical therapy or wearing a cervical collar. You rarely need surgery.'
+p59
+sg10
+S'Injuries and Wounds | Neck Injuries and Disorders | National Library of Medicine (Source: MedLine)'
+p60
+sg12
+S'medline/?r=Injuries and Wounds | Neck Injuries and Disorders | National Library of Medicine'
+p61
+sg14
+F57.34428571428572
+sg15
+S' Any part of your neck - muscles, bones, joints, tendons, ligaments, or nerves - can cause neck problems. Neck pain is very common. Pain may also come from your  ... '
+p62
+sg17
+F67.76
+sa(dp63
+g5
+S'Bing'
+p64
+sg7
+F83.33333333333334
+sg8
+VPain is a distressing feeling often caused by intense or damaging stimuli, such as stubbing a toe, burning a finger, putting alcohol on a cut, and bumping the "funny ...
+p65
+sg10
+VPain - Wikipedia, the free encyclopedia (Source: Bing)
+p66
+sg12
+Vhttps://en.wikipedia.org/wiki/Pain
+p67
+sg14
+F66.91666666666667
+sg15
+g65
+sg17
+F50.5
+sa(dp68
+g5
+g64
+sg7
+F45.0
+sg8
+VIntroduction to articles and videos on pain, including self-help tips, advice for better sex, and the type of NHS help available for pain sufferers.
+p69
+sg10
+VLiving with pain - Live Well - NHS Choices (Source: Bing)
+p70
+sg12
+Vhttp://www.nhs.uk/Livewell/Pain/Pages/Painhome.aspx
+p71
+sg14
+F50.29
+sg15
+g69
+sg17
+F55.58
+sa(dp72
+g5
+g64
+sg7
+F60.0
+sg8
+Vpain (p\u0101n) n. 1. a. An unpleasant feeling occurring as a result of injury or disease, usually localized in some part of the body: felt pains in his chest.
+p73
+sg10
+Vpain \u2013 definition of pain by The Free Dictionary (Source: Bing)
+p74
+sg12
+Vhttp://www.thefreedictionary.com/pain
+p75
+sg14
+F71.325
+sg15
+g73
+sg17
+F82.65
+sa(dp76
+g5
+g64
+sg7
+F0.0
+sg8
+VStay up-to-date. Register your interests and receive email alerts tailored to your needs Click here to sign up
+p77
+sg10
+VPAIN® - Journal - Elsevier (Source: Bing)
+p78
+sg12
+Vhttp://www.journals.elsevier.com/pain
+p79
+sg14
+F26.605
+sg15
+g77
+sg17
+F53.21
+sa(dp80
+g5
+g64
+sg7
+F0.0
+sg8
+VLearn about Pain on Healthgrades.com, including information on symptoms, causes and treatments.
+p81
+sg10
+VPain - Acute Pain - Chronic Pain - Symptoms, Causes ... (Source: Bing)
+p82
+sg12
+Vhttp://www.healthgrades.com/symptoms/pain
+p83
+sg14
+F24.235
+sg15
+g81
+sg17
+F48.47
+sa(dp84
+g5
+g64
+sg7
+F62.5
+sg8
+VThat sadness, and the sheer level of pain I was in almost paralyzed me, leaving me unable to take care of my home or my children.
+p85
+sg10
+VPain | Define Pain at Dictionary.com (Source: Bing)
+p86
+sg12
+Vhttp://dictionary.reference.com/browse/pain
+p87
+sg14
+F62.254999999999995
+sg15
+g85
+sg17
+F62.01
+sa(dp88
+g5
+g64
+sg7
+F45.0
+sg8
+VChronic pain affects an estimated 86 million American adults to some degree. Here you'll find the latest pain management information including treatments, as well as ...
+p89
+sg10
+VWebMD Pain Management Center - Find pain management ... (Source: Bing)
+p90
+sg12
+Vhttp://www.webmd.com/pain-management
+p91
+sg14
+F47.92
+sg15
+g89
+sg17
+F50.84
+sa(dp92
+g5
+g64
+sg7
+F0.0
+sg8
+VPain management (also called pain medicine or algiatry) is a branch of medicine employing an interdisciplinary approach for easing the suffering and improving the ...
+p93
+sg10
+VPain management - Wikipedia, the free encyclopedia (Source: Bing)
+p94
+sg12
+Vhttps://en.wikipedia.org/wiki/Pain_relief
+p95
+sg14
+F10.87
+sg15
+g93
+sg17
+F21.74
+sa(dp96
+g5
+g64
+sg7
+F45.0
+sg8
+VThe medication may upset your stomach but if you experience acute abdominal pain call your doctor. I've had chronic back pain since the accident.
+p97
+sg10
+VPain | Definition of Pain by Merriam-Webster (Source: Bing)
+p98
+sg12
+Vhttp://www.merriam-webster.com/dictionary/pain
+p99
+sg14
+F52.15
+sg15
+g97
+sg17
+F59.3
+sa(dp100
+g5
+g64
+sg7
+F68.33333333333333
+sg8
+VPain Definition Pain is an unpleasant feeling that is conveyed to the brain by sensory neurons. The discomfort signals actual or potential injury to the body. However ...
+p101
+sg10
+VPain | definition of pain by Medical dictionary (Source: Bing)
+p102
+sg12
+Vhttp://medical-dictionary.thefreedictionary.com/Pain
+p103
+sg14
+F63.306666666666665
+sg15
+g101
+sg17
+F58.28
+sa(dp104
+g5
+g64
+sg7
+F0.0
+sg8
+VPain.com is your number resource for pain management tips.
+p105
+sg10
+Vpain.com - Pain.com is your number resource for pain ... (Source: Bing)
+p106
+sg12
+Vhttp://pain.com
+p107
+sg14
+F31.17
+sg15
+g105
+sg17
+F62.34
+sa(dp108
+g5
+g64
+sg7
+F100.0
+sg8
+VPain management overview. Pain management is important for ongoing pain control, especially if you suffer with long-term or chronic pain. After a pain assessment ...
+p109
+sg10
+VPain management centre: Find pain management information ... (Source: Bing)
+p110
+sg12
+Vhttp://www.webmd.boots.com/pain-management/default.htm
+p111
+sg14
+F77.45
+sg15
+g109
+sg17
+F54.9
+sa(dp112
+g5
+g64
+sg7
+F53.99999999999999
+sg8
+VThe online version of PAIN® at ScienceDirect.com, the world's leading platform for high quality peer-reviewed full-text journals.
+p113
+sg10
+VPAIN® - ScienceDirect.com (Source: Bing)
+p114
+sg12
+Vhttp://www.sciencedirect.com/science/journal/03043959
+p115
+sg14
+F54.449999999999996
+sg15
+g113
+sg17
+F54.9
+sa(dp116
+g5
+g64
+sg7
+F0.0
+sg8
+VChronic pain facts* Introduction to chronic pain; The A to Z of pain; How is pain diagnosed? Pain management; What is the role of age and gender in pain?
+p117
+sg10
+VChronic Pain: Get the Facts on Management - MedicineNet (Source: Bing)
+p118
+sg12
+Vhttp://www.medicinenet.com/chronic_pain/article.htm
+p119
+sg14
+F41.325
+sg15
+g117
+sg17
+F82.65
+sa(dp120
+g5
+g64
+sg7
+F0.0
+sg8
+VChronic pain information page compiled by the National Institute of Neurological Disorders and Stroke (NINDS).
+p121
+sg10
+VPain: Hope Through Research (Source: Bing)
+p122
+sg12
+Vhttp://www.ninds.nih.gov/disorders/chronic_pain/detail_chronic_pain.htm
+p123
+sg14
+F11.205
+sg15
+g121
+sg17
+F22.41
+sa(dp124
+g5
+g64
+sg7
+F5.555555555555556
+sg8
+VThe British Pain Society aims to promote education, training, research and development in all fields of pain. It endeavours to increase both professional and public ...
+p125
+sg10
+VThe British Pain Society | An alliance of professionals ... (Source: Bing)
+p126
+sg12
+Vhttp://www.britishpainsociety.org
+p127
+sg14
+F28.19777777777778
+sg15
+g125
+sg17
+F50.84
+sa(dp128
+g5
+g64
+sg7
+F44.82142857142857
+sg8
+VCompound Forms/Forme composte: English: Italiano: acute pain n noun: Refers to person, place, thing, quality, etc. (severe, sharp physical discomfort)
+p129
+sg10
+Vpain - Dizionario inglese-italiano WordReference (Source: Bing)
+p130
+sg12
+Vhttp://www.wordreference.com/enit/pain
+p131
+sg14
+F44.61571428571428
+sg15
+g129
+sg17
+F44.41
+sa(dp132
+g5
+g64
+sg7
+F53.333333333333336
+sg8
+VPain is the most prominent member of a class of sensations known as bodily sensations, which includes itches, tickles, tingles, orgasms, and so on.
+p133
+sg10
+VPain (Stanford Encyclopedia of Philosophy) (Source: Bing)
+p134
+sg12
+Vhttp://plato.stanford.edu/entries/pain
+p135
+sg14
+F54.45666666666666
+sg15
+g133
+sg17
+F55.58
+sa(dp136
+g5
+g64
+sg7
+F80.0
+sg8
+VSynonyms for pain at Thesaurus.com with free online thesaurus, antonyms, and definitions. Dictionary and Word of the Day.
+p137
+sg10
+VPain Synonyms, Pain Antonyms | Thesaurus.com (Source: Bing)
+p138
+sg12
+Vhttp://www.thesaurus.com/browse/pain
+p139
+sg14
+F64.235
+sg15
+g137
+sg17
+F48.47
+sa(dp140
+g5
+g64
+sg7
+F37.5
+sg8
+VPAIN is the official journal of the International Association for the Study of Pain and publishes original research on the nature, mechanisms and treatment of pain.
+p141
+sg10
+VPAIN (Source: Bing)
+p142
+sg12
+Vhttp://journals.lww.com/pain/pages/default.aspx
+p143
+sg14
+F37.065
+sg15
+g141
+sg17
+F36.63
+saacdatetime
+date
+p144
+(S'\x07\xe0\x03\x11'
+p145
+tp146
+Rp147
+as.

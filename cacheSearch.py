@@ -7,9 +7,16 @@ from sensitivity import get_sensitivity_rating
 from apiWrap import *
 from django.template.defaultfilters import slugify
 import httplib
+import pickle
 
+def loadCache():
+	if USE_CACHE and os.path.isfile(PICKLE_FILE):
+		return pickle.load(open(PICKLE_FILE, "r"))
+	return {}
+
+PICKLE_FILE = "cache.pickle"
 USE_CACHE = True
-cache = { }
+cache = loadCache()
 
 def formatURL(s):
         if s[0:8] == "https://":
@@ -18,8 +25,15 @@ def formatURL(s):
             return s
         return "http://" + s
 
+def saveCache():
+	pickle.dump(cache, open(PICKLE_FILE, "w+"))
+
+def resetCache():
+	cache = {}
+	saveCache()
+
 def doSearch(query, api="*", user=None):
-	def results(query, api="*", user=None):
+	def results(query, api="*", user=None, updateCache = USE_CACHE):
 		l = []
 		if api == "medline":
 			l = medline(query)
@@ -29,23 +43,29 @@ def doSearch(query, api="*", user=None):
 			l = bing(query) 
 		elif api == "*":
 			for api in [ "medline", "healthfinder", "bing" ]:
-				l += results(query, api=api, user=user) 
+				l += results(query, api=api, user=user, updateCache = False) 
 
-		l.sort(key=lambda x : x["sensitivity"], reverse=True)
-
-		if USE_CACHE:
-			cache[query] = [ l, date.today() ]
+		if updateCache and api != "healthfinder":
+			cache[query] = [[v for v in l if v["source"].lower() != "healthfinder"] , date.today() ]
+			#saveCache()
 
 		return l
 
 	def haveCache():
-		if not USE_CACHE:
+		if not USE_CACHE or api == "healthfinder":
 			return False
 		return query in cache and (date.today() - cache.get(query)[1]).days < 3
+	
 	if haveCache():
-		return cache[query][0]
+		print "Loading from cache"
+		l = cache[query][0]
+		if api == "*":
+			l += results(query, api = "healthfinder", user=user)
 	else:
-		return results(query, api=api, user=None)
+		l = results(query, api=api, user=user)
+
+	l.sort(key=lambda x : x["sensitivity"], reverse=True)
+	return l
 
 def formatObject(url, title, description, source, shortDescription=""):
 	senseData = get_sensitivity_rating(description)
@@ -82,7 +102,7 @@ def healthfinder(query, user):
                 calculate_age(user.DOB), 
                 {"M":"Male","F":"Female"}[user.gender]):
 
-		title = q["Title"] + " (Source : HealthFinder)"		
+		title = q["Title"]
 		url = formatURL(q["AccessibleVersion"])
 		description = q["Sections"][0]["Content"]
 		
@@ -102,4 +122,3 @@ def bing(query):
 
 		results += [r]
 	return results
-	

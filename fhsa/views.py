@@ -51,13 +51,10 @@ def search(request):
 
     logged = True
 
-    user = None
-
     try:
         user = UserProfile.objects.get(user=request.user)
     except:
-        logged = False
-
+        user = None
     query = getRequestParam("query", request)
     api = getRequestParam("api", request)
 
