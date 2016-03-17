@@ -124,5 +124,10 @@ def register(request):
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
 
 def medline(request):
+    l = doSearch("back pain", api="medline")
+    return render(request,
+        'fhsa/medline.html',
+        {"r":l[0]})
+
     return HttpResponse("Not yet implemented")
     

@@ -96,6 +96,7 @@ def calculate_age(born):
 
 def healthfinder(query, user):
 	results = []
+	return []
 	if user == None:
 		return []
 	for q in hfSearch(query, 
