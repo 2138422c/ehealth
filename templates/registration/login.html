@@ -5,11 +5,16 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    <h1>Login</h1>
-    <form method="post" action=".">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <input type="submit" value="Log in" />
-        <input type="hidden" name="next" value="{{ next }}" />
-    </form>
+	<div class="container">
+		<h1 class="page-title">Login</h1>
+		<div id="login-div">
+			<form id="register-form" method="post" action=".">
+				{% csrf_token %}
+				<input class="input-text" id="id_username" maxlength="254" name="username" type="text" placeholder="Username">
+				<input class="input-text" id="id_password" name="password" type="password" placeholder="Password">
+				<input id="register-button" type="submit" value="Log in" />
+				<input type="hidden" name="next" value="{{ next }}" />
+			</form>
+		</div>
+	</div>
 {% endblock %}
