@@ -1,5 +1,7 @@
 html {
 	height:100%;
+	margin:0;
+	padding:0;
 }
 body {
 	position: relative;
@@ -18,6 +20,7 @@ ul {
 #nav-bar {
 	overflow: hidden;
     background-color: #333;
+	height:46px;
 }
 
 li {
@@ -102,5 +105,67 @@ form {
 #footer {
 	position:absolute;
 	bottom: 0;
+}
+
+#profile-page {
+	position:absolute;
+	top: 46px;
+	width:100%;
+	height:90%;
+}
+
+#profile-name {
+	position:absolute;
+	width:100%;
+	height:10%;
+	padding:6px 15px 6px 15px;
+	border: 5px groove red;
+	text-align: center;
+}
+
+#profile-image {
+	position:absolute;
+	border: 1px solid #ddd;
+    border-radius: 4px;
+	left:18%;
+	top: 10%;
+}
+
+#bio {
+	position:absolute;
+	top:16%;
+	height:60%;
+	width:20%;
+	margin-left: 1%;
+	padding:6px 15px 6px 15px;
+	border: 5px groove red;
+	text-align:center;
+}
+
+#bio-text {
+	position:absolute;
+	top: 65%;
+	left: 27%;
+}
+
+#appearance {
+	position:absolute;
+	top: 80%;
+	width:20%;
+	height:19%;
+	margin-left: 1%;
+	padding:6px 15px 6px 15px;
+	border: 5px groove red;
+	text-align:center;
+}
+
+#folders {
+	position:absolute;
+	width: 72%;
+	top: 16%;
+	height: 83%;
+	left:24%;
+	padding:6px 15px 6px 15px;
+	border: 5px groove red;
 }
 
