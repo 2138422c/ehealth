@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/index.css' %}">
+	<Title>{% block title %}{% endblock%}</Title>
+  </head>
+
+  <body>
+	<ul id="nav-bar">
+		<li class="home"><a class="header-link" href="/fhsa/">eHealth</a> 
+		{% if user.is_authenticated %}
+			<li class="header-element"><a class="header-link" href="/fhsa/logout">Logout</a></li>
+			<li class="header-element"><a id="profile-link" href="/fhsa/user_page">
+				<img id="profile-pic" src="{{ avatarSrc }}" alt="profile picture" width=30 height=30/>
+				{{ user.username }}
+			</a></li>
+		{% else %}
+			<li class="header-element"><a class="header-link" href="/fhsa/register/">Register Here</a></li>
+			<li class="header-element"><a class="header-link" href="/fhsa/login/">Login</a></li>
+		{% endif %}
+	</ul>
+	
+	{% block body %}{% endblock %}
+	
+  </body>
+</html>

@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>About</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}About{% endblock %}
+
+{% block body %}
     <h1><a href="/fhsa/">eHealth</a></h1>
     <h2>About</h2>
     <p>
     A web application to make searching for possible illnesses, remedies, and articles relating to
     medical concerns simple.
     </p>
-</body>
-</html>
+{% endblock %}

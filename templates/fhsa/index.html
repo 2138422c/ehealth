@@ -1,41 +1,27 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+
 {% load staticfiles %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/index.css' %}">
-    <title>eHealth</title>
-</head>
-<body>
-    <h1><a href="/fhsa/">eHealth</a></h1>
-    <div id="userheader">
-        {% if user.is_authenticated %}
-            <a href="/fhsa/logout">Logout</a>
-            <a href="/fhsa/user_page">
-            
-            <img src="{{ avatarSrc }}" alt="profile picture" width=70 height=70/>
-            {{ user.username }}</a>
-        {% else %}
-            <a href="/fhsa/register/">Register Here</a>
-            <a href="/fhsa/login/">Login</a>
-        {% endif %}
-    </div>
-    <div id="search">
-        {% if user.is_authenticated %}
-            <h2>Welcome back, {{  user.username }}</h2>
-        {% else %}
-            <h2>Welcome to eHealth</h2>
-        {% endif %}
-        <form class="form-inline" id="user_form" method="post" action="{% url 'search' %}">
-            {% csrf_token %}
-            <!-- Display the search form elements here -->
-            <input class="form-control" type="text" size="50" name="query" value="" id="query" /><br/>
-            <input class="btn btn-primary" type="submit" name="submit" value="Search" />
-            <br />
-        </form>
-    </div>
-    <div id="footer">
-       <a href="/fhsa/about/">About</a>
-    </div>
-</body>
-</html>
+
+{% block title %}eHealth{% endblock %}
+
+{% block body %}
+	<div id="search-div">
+		{% if user.is_authenticated %}
+			<h1>Welcome back, {{  user.username }}</h1>
+		{% else %}
+			<h1>Welcome to eHealth</h1>
+		{% endif %}
+		<form id="search" id="user_form" method="post" action="{% url 'search' %}">
+			{% csrf_token %}
+			<!-- Display the search form elements here -->
+			<input id="search-bar" type="text" size="50" name="query" value="" id="query" placeholder="Type symptoms here" />
+			<input id="search-button" type="submit" name="submit" value="Search" />
+		</form>
+	</div>
+		
+	<div id="footer">
+		<a href="/fhsa/about/">About</a>
+	</div>
+	
+{% endblock %}
+	

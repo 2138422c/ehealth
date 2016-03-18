@@ -1,12 +1,10 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+
 {% load staticfiles %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/user_page.css' %}">
-    <title>{{ user.user }}'s Page</title>
-</head>
-<body>
+
+{% block title %}{{ user.user }}'s Page{% endblock %}
+
+{% block body %}
     <h1><a href="/fhsa/">eHealth</a></h1>
     <div id="header">
         {% block content %}
@@ -27,5 +25,4 @@
             <input type="radio" name="appearance" value="night">Night Time Mode<br/>
         </form>
     </div>
-</body>
-</html>
+{% endblock %}

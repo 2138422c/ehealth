@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ folder.name }}</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{{ folder.name }}{% endblock %}
+
+{% block body %}
     <div id="header"></div>
         <h1>{{ folder.name }}</h1>
         <p>{{ folder.description }}</p>
     </div>
-</body>
-</html>
+{% endblock %}

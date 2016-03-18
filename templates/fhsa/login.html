@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
     <h1>Login</h1>
 
         <form id="login_form" method="post" action="/login/">
@@ -16,5 +16,4 @@
 
             <input type="submit" value="submit" />
         </form>
-</body>
-</html>
+{% endblock %}
