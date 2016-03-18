@@ -5,9 +5,9 @@
 {% block title %}{{ user.user }}'s Page{% endblock %}
 
 {% block body %}
-	<div id="profile-page">
+	<div class="container">
 		<div id="profile-name">
-			<h1 id="name">{{ user.user }}</h1>
+			<h1>{{ user.user }}</h1>
 		</div>
 		<div id="bio">
 			<img id="profile-image" src="{{ avatarSrc }}" height=250 width=250>

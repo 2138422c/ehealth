@@ -2,31 +2,37 @@
 
 {% load staticfiles %}
 
-{% block title %}Register {% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block body %}
-
-        <h1><a href="/fhsa/">eHealth</a></h1>
-        <h2>Register with eHealth</h2>
+	<div class="container">
+        <h1 class="page-title">Register with eHealth</h1>
+		<div id="register">
         {% if registered %}
         Thank you for registering!
         <a href="/fhsa/">Return to the homepage.</a><br />
         {% else %}
-        Register here...
 
-        <form id="user_form" method="post" action="/fhsa/register/"
+        <form id="register-form" id="user_form" method="post" action="/fhsa/register/"
                 enctype="multipart/form-data">
 
             {% csrf_token %}
+				 <input class="input-text" id="id_username" maxlength="30" name="username" type="text" placeholder="Username">
+				 <span class="helptext"> Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.</span><br/>
+				 <input class="input-text" id="id_email" maxlength="254" name="email" type="email" placeholder="Email address"><br/>
+				 <input class="input-text" id="id_password" name="password" type="password" placeholder="Password"><br/>
+				 <label for="id_avatar"> Avatar:</label>
+				 <input id="avatar-select" id="id_avatar" name="avatar" type="file"><br/>
+				 <select class="input-select" id="id_gender" name="gender">
+					<option value="" selected="selected">Gender</option>
+					<option value="M">Male</option>
+					<option value="F">Female</option>
+				</select><br/>
+				<input class="input-text" id="id_DOB" name="DOB" type="text" placeholder="Date of Birth"><br/>
 
-            <!-- Display each form. The as_p method wraps each element in a paragraph
-                 (<p>) element. This ensures each element appears on a new line,
-                 making everything look neater. -->
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-
-            <!-- Provide a button to click to submit the form. -->
-            <input type="submit" name="submit" value="Register" />
+            <input id="register-button" type="submit" name="submit" value="Register" />
         </form>
         {% endif %}
+		</div>
+	</div>
 {% endblock %}
