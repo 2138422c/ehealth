@@ -5,6 +5,9 @@
 {% block title %}Search{% endblock %}
 
 {% block body %}
+    <div class="page-header">
+        <h1><a href="/fhsa/">eHealth</a></h1>
+    </div>
     <div class="row">
         <div class="panel panel-primary">
             <br/>
@@ -15,6 +18,9 @@
                 <input class="btn btn-primary" type="submit" name="submit" value="Search" />
                 <br />
             </form>
+        <div id="sidebar">
+                <a href="?query={{searchterm}}&api=*">All</a> | <a href="?query={{searchterm}}&api=bing">Bing</a> | <a href="?query={{searchterm}}&api=medline">Medline</a> | <a href "?query={{searchterm}}&api=healthfinder">HealthFinder</a>
+        </div>
             <div class="panel">
                 {% if result_list %}
                     <div class="panel-heading">
@@ -26,7 +32,7 @@
                                 <div class="list-group-item">
                                     <h4 class="list-group-item-heading"><a href="{{ result.url }}">{{ result.title }}</a></h4>
                                     <p class="list-group-item-text">{{ result.shortDescription }}</p>
-                                    <p class="list-group-item-sensitivity">Sensitivity: {{result.sensitivity}}% Readability: {{result.readability}}%<a href="/fhsa/save">save</a></p>
+                                    <p class="list-group-item-sensitivity">Sensitivity: {{result.sensitivity}}</p>
                                 </div>
                             {% endfor %}
                         </div>

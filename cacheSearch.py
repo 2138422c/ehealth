@@ -15,7 +15,7 @@ def loadCache():
 	return {}
 
 PICKLE_FILE = "cache.pickle"
-USE_CACHE = True
+USE_CACHE = False
 cache = loadCache()
 
 def formatURL(s):
@@ -45,9 +45,9 @@ def doSearch(query, api="*", user=None):
 			for api in [ "medline", "healthfinder", "bing" ]:
 				l += results(query, api=api, user=user, updateCache = False) 
 
-		if updateCache and api != "healthfinder":
+		if updateCache and api.lower() != "healthfinder":
 			cache[query] = [[v for v in l if v["source"].lower() != "healthfinder"] , date.today() ]
-			#saveCache()
+			saveCache()
 
 		return l
 
@@ -57,10 +57,11 @@ def doSearch(query, api="*", user=None):
 		return query in cache and (date.today() - cache.get(query)[1]).days < 3
 	
 	if haveCache():
-		print "Loading from cache"
 		l = cache[query][0]
 		if api == "*":
 			l += results(query, api = "healthfinder", user=user)
+		else:
+			l = [ q for q in l if q["source"].lower() == api.lower() ]
 	else:
 		l = results(query, api=api, user=user)
 

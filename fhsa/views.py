@@ -61,9 +61,11 @@ def search(request):
     if api not in [ "medline", "bing", "healthfinder" ]:
         api = "*"
 
+    print api
+
     result_list = doSearch(query, api=api, user=user)
-    avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
-    return render(request, 'fhsa/search.html', {'result_list': result_list, 'avatarSrc': avatarSrc})
+    
+    return render(request, 'fhsa/search.html', {'result_list': result_list, "searchterm":query} )
 
 def folder(request, folder_name_slug):
     context_dict = {}
@@ -82,9 +84,7 @@ def logout_view(request):
     return HttpResponseRedirect('/fhsa/')
 
 def about(request):
-    user = UserProfile.objects.get(user=request.user)
-    avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
-    return render(request, 'fhsa/about.html', {'avatarSrc': avatarSrc})
+    return render(request, 'fhsa/about.html', {})
 
 def register(request):
     registered = False
@@ -132,3 +132,4 @@ def medline(request):
         {"r":l[0]})
 
     return HttpResponse("Not yet implemented")
+    
