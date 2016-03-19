@@ -63,8 +63,8 @@ def search(request):
 
 
     result_list = doSearch(query, api=api, user=user)
-    
-    return render(request, 'fhsa/search.html', {'result_list': result_list, "searchterm":query} )
+    avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
+    return render(request, 'fhsa/search.html', {'result_list': result_list, "searchterm":query, 'avatarSrc':avatarSrc} )
 
 def folder(request, folder_name_slug):
     context_dict = {}
@@ -83,7 +83,9 @@ def logout_view(request):
     return HttpResponseRedirect('/fhsa/')
 
 def about(request):
-    return render(request, 'fhsa/about.html', {})
+    user = UserProfile.objects.get(user=request.user)
+    avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
+    return render(request, 'fhsa/about.html', {'avatarSrc': avatarSrc})
 
 def register(request):
     registered = False
@@ -131,4 +133,3 @@ def medline(request):
         {"r":l[0]})
 
     return HttpResponse("Not yet implemented")
-    
