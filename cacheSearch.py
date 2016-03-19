@@ -78,7 +78,7 @@ def formatObject(url, title, description, source, shortDescription=""):
 
 def medline(query):
 	results = []
-	for q in medlineSearch(query, debug=True):
+	for q in medlineSearch(query):
 		
 		title = "%s | %s | %s" % (q["groupName"], q["title"], q["organizationName"])		
 		url = "medline/?r=%s" % title
