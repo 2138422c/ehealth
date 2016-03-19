@@ -61,7 +61,6 @@ def search(request):
     if api not in [ "medline", "bing", "healthfinder" ]:
         api = "*"
 
-    print api
 
     result_list = doSearch(query, api=api, user=user)
     

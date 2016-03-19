@@ -15,7 +15,7 @@ def loadCache():
 	return {}
 
 PICKLE_FILE = "cache.pickle"
-USE_CACHE = False
+USE_CACHE = True
 cache = loadCache()
 
 def formatURL(s):
@@ -38,6 +38,7 @@ def doSearch(query, api="*", user=None):
 		if api == "medline":
 			l = medline(query)
 		elif api == "healthfinder":
+			print "Hello world"
 			l = healthfinder(query, user=user)
 		elif api == "bing":
 			l = bing(query) 
@@ -72,7 +73,7 @@ def formatObject(url, title, description, source, shortDescription=""):
 	senseData = get_sensitivity_rating(description)
 	return { "url":url, "title": title + " (Source: %s)" % source, 
 		"description" : description, "source":source, 
-		"shortDescription":{True:description, False:shortDescription}[shortDescription == ""],
+		"shortDescription":{True:"%s ..." % " ".join(description.split(" ")[0:30]), False:shortDescription}[shortDescription == ""],
 		"sentimentality": senseData["sentimentality"], "readability": senseData["readability"],
 		"sensitivity": senseData["sensitivity"]
 		}
@@ -97,7 +98,6 @@ def calculate_age(born):
 
 def healthfinder(query, user):
 	results = []
-	return []
 	if user == None:
 		return []
 	for q in hfSearch(query, 
