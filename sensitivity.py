@@ -13,7 +13,9 @@ from textstat.textstat import textstat
 
 def  get_sensitivity_rating(text):
     blob = TextBlob(text)
-    d = { "sentimentality":blob.subjectivity * 100, 
+    d = { "sentimentality":blob.subjectivity * 100,
         "readability":textstat.flesch_reading_ease(text)}
-    d["sensitivity"] = (d["sentimentality"] + d["readability"])/2 
+    # subjectivity is a float between 0 and 1, multiplied it by 100 so it's percent
+    # The overall sensitivity of teh article is the readability minus the subjectivity
+    d["sensitivity"] = (d["readability"] - d["sentimentality"])
     return d
