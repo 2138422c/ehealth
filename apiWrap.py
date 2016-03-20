@@ -87,10 +87,8 @@ def urlBuilder(baseUrl, dict):
 		out += "&%s=%s" % ( dict.keys()[i], dict[dict.keys()[i]] ) 
 	return baseUrl + out
 
-#print urlBuilder("www.kieranisgod.com", { "query":"toast is good", "user":"Kieran McCool" })
 def testBing(query):
-	print "Hi"
-	d =  bingSearch(query) # I was eating those at the time of writing.
+	d =  bingSearch(query) 
 	f = open("testBing.txt", "w+")
 	for r in d:
 		f.write("\n%s\n" % r)

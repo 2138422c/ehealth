@@ -141,9 +141,14 @@ def register(request):
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
 
 def medline(request):
-    l = doSearch(query, api="medline")
+    title = getRequestParam("r", request).encode('ascii', 'ignore')
+    query = getRequestParam("q", request).encode('ascii', 'ignore')
+    
+    def findResult(title, results):
+        for result in results:
+            if result["title"].encode('ascii', 'ignore') == title:
+                return result
+
     return render(request,
         'fhsa/medline.html',
-        {"r":l[0]})
-
-    return HttpResponse("Not yet implemented")
+        {"r":findResult(title, doSearch(query))})

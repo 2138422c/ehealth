@@ -88,7 +88,6 @@ def genImage(outPath, hash, unhash = ""):
 
 # This method is the one we use!!!!!!!
 def generateAvatar(name, outPath):
-	print name
 	# gets a properly formatted hash
 	hash = finalHash(name)
 	# Makes sure the location we're saving to exists.

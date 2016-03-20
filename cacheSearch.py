@@ -38,7 +38,6 @@ def doSearch(query, api="*", user=None):
 		if api == "medline":
 			l = medline(query)
 		elif api == "healthfinder":
-			print "Hello world"
 			l = healthfinder(query, user=user)
 		elif api == "bing":
 			l = bing(query) 
@@ -83,11 +82,11 @@ def medline(query):
 	for q in medlineSearch(query):
 		
 		title = "%s | %s | %s" % (q["groupName"], q["title"], q["organizationName"])		
-		url = "medline/?r=%s" % title
 		description = q["FullSummary"]
 
-		r = formatObject(url, title, description, "MedLine", shortDescription = q["snippet"])
+		r = formatObject("", title, description, "MedLine", shortDescription = q["snippet"])
 
+		r["url"] = "medline/?r=%s&q=%s" % (r["title"], query)
 		results += [r]
 	return results
 
