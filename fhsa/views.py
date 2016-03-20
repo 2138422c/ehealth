@@ -67,8 +67,8 @@ def search(request):
 
 @login_required
 def save(request):
-    folders = UserFolder.objects.all()
     user = UserProfile.objects.get(user=request.user)
+    folders = UserFolder.objects.filter(user = user)
     userorg = User.objects.get(username = request.user)
     return render(request, 'fhsa/save.html', {'user': user, 'userorg': userorg, 'folders': folders, 'result_list': result_list})
 
