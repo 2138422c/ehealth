@@ -170,12 +170,12 @@ form {
 
 #folders {
 	position:absolute;
-	width: 72%;
-	top: 16%;
-	height: 83%;
-	left:24%;
+	overflow:scroll;
+	width: 90%;
+	height: 80%;
+	left:3.5%;
 	padding:6px 15px 6px 15px;
-	border: 5px groove red;
+	border: 2px groove #333;
 }
 
 #register {
@@ -352,4 +352,29 @@ form {
 	border:2px groove #333;
 	padding: 6px 15px 6px 15px;
 	margin-left:9px;
+}
+
+#folder-options {
+	position:absolute;
+	bottom:2%;
+	left:3.5%;
+	width:92.3%;
+	height:10%;
+}
+
+.folder-option {
+	position:absolute;
+	display:inline-block;
+	padding-left: 2%;
+	padding-right:2%;
+	text-align:center;
+	border: 2px groove #333;
+	height: 80%;
+	width: 10%;
+	text-decoration:none;
+	background-color:#333;
+	color:white;
+}
+
+.folder-list-option {
 }
