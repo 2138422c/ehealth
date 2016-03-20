@@ -16,13 +16,11 @@ def getRequestParam(p,request):
         return request.POST[p]
     return ""
 
-
 @login_required
 def home(request):
   return HttpResponse('/fhsa/')
 
 def user_page(request):
-    folder = UserFolder.objects.all()
     user = UserProfile.objects.get(user=request.user)
     userorg = User.objects.get(username = request.user)
     avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
@@ -51,6 +49,7 @@ def search(request):
 
     logged = True
     global query
+    global result_list
     try:
         user = UserProfile.objects.get(user=request.user)
     except:
@@ -65,6 +64,13 @@ def search(request):
     result_list = doSearch(query, api=api, user=user)
     avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
     return render(request, 'fhsa/search.html', {'result_list': result_list, "searchterm":query, 'avatarSrc':avatarSrc} )
+
+@login_required
+def save(request):
+    folders = UserFolder.objects.all()
+    user = UserProfile.objects.get(user=request.user)
+    userorg = User.objects.get(username = request.user)
+    return render(request, 'fhsa/save.html', {'user': user, 'userorg': userorg, 'folders': folders, 'result_list': result_list})
 
 def folder(request, folder_name_slug):
     context_dict = {}

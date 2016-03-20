@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Save Result{% endblock %}
+
+{% block body %}
+			<h1>Save Result</h1>
+			{% csrf_token %}
+
+      <ul>
+      {% for f in folders %}
+        {% if f.user == user.user %}
+          <li>{{ f.name }}</li>
+            <ul><li>{{ f.description }}</li></ul>
+        {% else %}
+        <!--Trying to understand why this isn't working-->
+          <li>
+          {{ f.user }}  {{ user.user }}
+          </li>
+        {% endif %}
+      {% endfor %}
+{% endblock %}
