@@ -76,10 +76,14 @@ def folder(request, folder_name_slug):
     context_dict = {}
     try:
         folder = UserFolder.objects.get(slug=folder_name_slug)
-        context_dict['folder_name'] = folder.name
+        context_dict['folder'] = folder
+        user = folder.user
 
     except UserFolder.DoesNotExist:
         pass
+
+    avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
+    context_dict['avatarSrc'] = avatarSrc
 
     return render(request, 'fhsa/folder.html', context_dict)
 

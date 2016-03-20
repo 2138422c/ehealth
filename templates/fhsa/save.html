@@ -7,7 +7,7 @@
 {% block body %}
 			<h1>Save Result</h1>
 			{% csrf_token %}
-
+			Where would you like to save this result?
 				{% for f in folders %}
           <h2><a href="/fhsa/folder/{{ f.slug }}">{{ f.name }}</a></h2>
             <p>			{{ f.description }}</p>
