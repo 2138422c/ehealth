@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^search/$', views.search, name="search"),
     url(r'^folder/(?P<folder_name_slug>[\w\-]+)/$', views.folder, name='category'),
     url(r'^save/$', views.save, name='save'),
+    url(r'^create_folder/$', views.create_folder, name="create_folder"),
     ]

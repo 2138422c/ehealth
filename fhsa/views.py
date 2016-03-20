@@ -72,6 +72,10 @@ def save(request):
     userorg = User.objects.get(username = request.user)
     return render(request, 'fhsa/save.html', {'user': user, 'userorg': userorg, 'folders': folders, 'result_list': result_list})
 
+@login_required
+def create_folder(request):
+    return render(request, 'fhsa/create_folder.html', {})
+
 def folder(request, folder_name_slug):
     context_dict = {}
     try:
