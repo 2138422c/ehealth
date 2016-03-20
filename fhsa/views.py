@@ -50,7 +50,7 @@ def search(request):
         return "http://" + s
 
     logged = True
-
+    global query
     try:
         user = UserProfile.objects.get(user=request.user)
     except:
@@ -127,7 +127,7 @@ def register(request):
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
 
 def medline(request):
-    l = doSearch("back pain", api="medline")
+    l = doSearch(query, api="medline")
     return render(request,
         'fhsa/medline.html',
         {"r":l[0]})
