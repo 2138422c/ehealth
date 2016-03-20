@@ -5,37 +5,26 @@
 {% block title %}Search{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="panel panel-primary">
-            <br/>
-            <form class="form-inline" id="user_form" method="post" action="{% url 'search' %}">
-                {% csrf_token %}
-                <!-- Display the search form elements here -->
-                <input class="form-control" type="text" size="50" name="query" value="" id="query" />
-                <input class="btn btn-primary" type="submit" name="submit" value="Search" />
-                <br />
+	<div id="search-results">
+		<form id="search2" id="user_form" method="post" action="{% url 'search' %}">
+            {% csrf_token %}
+            <input id="search-bar" type="text" size="50" name="query" value="" id="query" placeholder="Type symptoms here" />
+            <input id="search-button" type="submit" name="submit" value="Search" />
             </form>
-        <div id="sidebar">
-                <a href="?query={{searchterm}}&api=*">All</a> | <a href="?query={{searchterm}}&api=bing">Bing</a> | <a href="?query={{searchterm}}&api=medline">Medline</a> | <a href="?query={{searchterm}}&api=healthfinder">HealthFinder</a>
-        </div>
-            <div class="panel">
-                {% if result_list %}
-                    <div class="panel-heading">
-                    <h3 class="panel-title">Results</h3>
-                    <!-- Display search results in an ordered list -->
-                    <div class="panel-body">
-                        <div class="list-group">
-                            {% for result in result_list %}
-                                <div class="list-group-item">
-                                    <h4 class="list-group-item-heading"><a href="{{ result.url }}">{{ result.title }}</a></h4>
-                                    <p class="list-group-item-text">{{ result.shortDescription }}</p>
-                                    <p class="list-group-item-sensitivity">Sensitivity: {{result.sensitivity}} <a href="/fhsa/save">save</a></p>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-                </div>
-            </div>
- </div></div>
+			<a class="mode" href="?query={{searchterm}}&api=*">All</a>  <a class="mode" href="?query={{searchterm}}&api=bing">Bing</a>  <a class="mode" href="?query={{searchterm}}&api=medline">Medline</a>  <a class="mode" href="?query={{searchterm}}&api=healthfinder">HealthFinder</a>
+	</div>
+	<div id="results">
+		<h1>Results</h1>
+		{% if result_list %}
+			<div>
+				{% for result in result_list %}
+					<div>
+						<h4><a class="result-header" href="{{ result.url }}">{{ result.title }}</a></h4>
+						<p>{{ result.shortDescription }}</p>
+						<p>Sensitivity: {{result.sensitivity}} <a href="/fhsa/save">save</a></p>
+					</div>
+				{% endfor %}
+			</div>			
+		{% endif %}			
+	</div>
 {% endblock %}

@@ -7,8 +7,13 @@
 {% block body %}
 			<h1>{{ user.user }}</h1>
 			<img id="profile-image" src="{{ avatarSrc }}" height=250 width=250>
-				<h2>Bio</h2>
+				<h1>Bio</h1>
 				Date of Birth: {{ user.DOB }} <br/>
 				Gender: {{ user.gender }}<br/>
 				Email: {{ userorg.email }}<br/>
+			<h3>Appearance</h3>
+			<form>
+				<input type="radio" name="appearance" value="default">Default Mode
+				<input type="radio" name="appearance" value="night">Night Time Mode<br/>
+			</form>
 {% endblock %}

@@ -7,20 +7,21 @@
 {% block body %}
 	<div id="search-div">
 		{% if user.is_authenticated %}
-			<h1>Welcome back, {{  user.username }}</h1>
+			<h1>Welcome back, {{  user.username }} </h1>
 		{% else %}
 			<h1>Welcome to eHealth</h1>
 		{% endif %}
 		<form id="search" id="user_form" method="post" action="{% url 'search' %}">
 			{% csrf_token %}
 			<!-- Display the search form elements here -->
-			<input id="search-bar" type="text" size="50" name="query" value="" id="query" placeholder="Type query here..." />
+			<input id="search-bar" type="text" size="50" name="query" value="" id="query" placeholder="Type symptoms here" />
 			<input id="search-button" type="submit" name="submit" value="Search" />
 		</form>
 	</div>
-
+		
 	<div id="footer">
 		<a href="/fhsa/about/">About</a>
 	</div>
-
+	
 {% endblock %}
+	
