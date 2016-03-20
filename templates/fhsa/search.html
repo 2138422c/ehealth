@@ -21,7 +21,7 @@
 					<div>
 						<h4><a class="result-header" href="{{ result.url }}">{{ result.title }}</a></h4>
 						<p>{{ result.shortDescription }}</p>
-						<p>Sensitivity: {{result.sensitivity}} <a href="/fhsa/save">save</a></p>
+						<p><a id="save" href="/fhsa/save">Save</a> Sensitivity: {{result.sensitivity}}</p>
 					</div>
 				{% endfor %}
 			</div>			

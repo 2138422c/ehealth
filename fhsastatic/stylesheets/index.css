@@ -290,12 +290,12 @@ form {
 
 .mode {
 	text-decoration:none;
-	color:black;
+	color:#333;
 	padding-right: 2%;
 }
 
 .mode:hover {
-	color:green;
+	color:black;
 	cursor: pointer;
 }
 
@@ -307,11 +307,24 @@ form {
 	margin-left: 10px;
 }
 
-.result-header{
+.result-header {
 	text-decoration:none;
 	font-size:20px;
 }
 
+.result-header:hover {
+	text-decoration:underline;
+}
+
 #centered-header{
 	text-align:center;
+}
+
+#save {
+	text-decoration:none;
+	cursor:pointer;
+}
+
+#save:hover {
+	text-decoration:underline;
 }
