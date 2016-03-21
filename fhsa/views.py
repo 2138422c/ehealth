@@ -98,9 +98,12 @@ def logout_view(request):
     return HttpResponseRedirect('/fhsa/')
 
 def about(request):
-    user = UserProfile.objects.get(user=request.user)
-    avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
-    return render(request, 'fhsa/about.html', {'avatarSrc': avatarSrc})
+    if request.user.is_anonymous():
+        return render(request, 'fhsa/about.html', {})
+    else:
+        user = UserProfile.objects.get(user=request.user)
+        avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
+        return render(request, 'fhsa/about.html', {"avatarSrc":avatarSrc})
 
 def register(request):
     registered = False
@@ -144,7 +147,7 @@ def register(request):
 def medline(request):
     title = getRequestParam("r", request).encode('ascii', 'ignore')
     query = getRequestParam("q", request).encode('ascii', 'ignore')
-    
+
     def findResult(title, results):
         for result in results:
             if result["title"].encode('ascii', 'ignore') == title:
