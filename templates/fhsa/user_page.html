@@ -25,7 +25,9 @@
 			{% for f in folders %}
 				<div class="folder">
 					<a class="folder-title" href="/fhsa/folder/{{ f.slug }}">{{ f.name }}</a></br>
-					{{ f.description }}
+					<p class="folder-description">
+						{{ f.description }}
+					</p>
 				</div>
 			{% endfor %}
 		</div>
