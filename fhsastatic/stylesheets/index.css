@@ -242,12 +242,12 @@ form {
 
 #about-div {
 	position:absolute;
-	height:90%;
-	width:80%;
-	left:6%;
+	height:80%;
+	width:60%;
+	left:16.5%;
 	top:5%;
 	padding: 20px 50px 20px 50px;
-	border: 5px groove black;
+	border: 2px groove #333;
 }
 
 #login-div {
@@ -428,4 +428,10 @@ form {
 
 .folder-title:hover {
 	text-decoration: underline;
+}
+
+#features-list {
+	position:absolute;
+	left:20%;
+	list-style: circle inside;
 }
