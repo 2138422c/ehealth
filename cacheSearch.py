@@ -34,22 +34,25 @@ def resetCache():
 
 def doSearch(query, api="*", user=None):
 	def results(query, api="*", user=None, updateCache = USE_CACHE):
-		l = []
-		if api == "medline":
-			l = medline(query)
-		elif api == "healthfinder":
-			l = healthfinder(query, user=user)
-		elif api == "bing":
-			l = bing(query) 
-		elif api == "*":
-			for api in [ "medline", "healthfinder", "bing" ]:
-				l += results(query, api=api, user=user, updateCache = False) 
+		try:
+			l = []
+			if api == "medline":
+				l = medline(query)
+			elif api == "healthfinder":
+				l = healthfinder(query, user=user)
+			elif api == "bing":
+				l = bing(query) 
+			elif api == "*":
+				for api in [ "medline", "healthfinder", "bing" ]:
+					l += results(query, api=api, user=user, updateCache = False) 
 
-		if updateCache and api.lower() != "healthfinder":
-			cache[query] = [[v for v in l if v["source"].lower() != "healthfinder"] , date.today() ]
-			saveCache()
+			if updateCache and api.lower() != "healthfinder":
+				cache[query] = [[v for v in l if v["source"].lower() != "healthfinder"] , date.today() ]
+				saveCache()
 
-		return l
+			return l
+		except:
+			return []
 
 	def haveCache():
 		if not USE_CACHE or api == "healthfinder":
