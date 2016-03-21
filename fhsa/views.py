@@ -22,9 +22,10 @@ def home(request):
 
 def user_page(request):
     user = UserProfile.objects.get(user=request.user)
+    folders = UserFolder.objects.filter(user = user)
     userorg = User.objects.get(username = request.user)
     avatarSrc = "/fhsastatic/profile_images/" + str(user) + ".png"
-    return render(request, 'fhsa/user_page.html', {'user': user, 'folder': folder, 'userorg': userorg, 'avatarSrc': avatarSrc})
+    return render(request, 'fhsa/user_page.html', {'user': user, 'folders': folders, 'userorg': userorg, 'avatarSrc': avatarSrc})
 
 def index(request):
     if request.method == 'POST':

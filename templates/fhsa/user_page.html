@@ -21,6 +21,13 @@
 	
 	<div id="folder-container">
 		<div id="folders">
+			{% csrf_token %}
+			{% for f in folders %}
+				<div class="folder">
+					<a class="folder-title" href="/fhsa/folder/{{ f.slug }}">{{ f.name }}</a></br>
+					{{ f.description }}
+				</div>
+			{% endfor %}
 		</div>
 		<ul id="folder-options">
 			<li class="folder-list-option"><a class="folder-option" href="/fhsa/create_folder/">Add a New Folder</a>

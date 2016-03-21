@@ -5,12 +5,20 @@
 {% block title %}Save Result{% endblock %}
 
 {% block body %}
-			<h1>Save Result</h1>
-			{% csrf_token %}
-			Where would you like to save this result?
+		<h1 class="page-title">Save Result</h1>
+		<div class="centered-div">Where would you like to save this result?</div>
+		<div id="save-folders-container">
+			<div id="save-folders">
+				{% csrf_token %}
 				{% for f in folders %}
-          <h2><a href="/fhsa/folder/{{ f.slug }}">{{ f.name }}</a></h2>
-            <p>			{{ f.description }}</p>
+					<div class="folder">
+						<a class="folder-title" href="/fhsa/folder/{{ f.slug }}">{{ f.name }}</a></br>
+						{{ f.description }}
+					</div>
 				{% endfor %}
-			<h2><a href="/fhsa/create_folder/">+New Folder</a></h2>
+			</div>
+			<ul id="save-folder-options">
+				<li class="folder-list-option"><a class="folder-option" href="/fhsa/create_folder/">Add a New Folder</a>
+			</ul>
+		</div>
 {% endblock %}
