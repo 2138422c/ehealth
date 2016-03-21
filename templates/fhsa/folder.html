@@ -5,8 +5,12 @@
 {% block title %}{{ folder.name }}{% endblock %}
 
 {% block body %}
-    <div id="header"></div>
-        <h1>{{ folder.name }} by {{ folder.user }}</h1>
+	<h1 class="page-title">{{ folder.name }} by {{ folder.user }}</h1>
+    <div id="folder-div">
         <p>{{ folder.description }}</p>
+		<ul id="folder-links">
+			<li class="folder-link">test1</li>
+			<li class="folder-link">test2</li>
+		</ul>
     </div>
 {% endblock %}

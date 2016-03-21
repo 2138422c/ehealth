@@ -443,3 +443,30 @@ form {
 	left:20%;
 	list-style: circle inside;
 }
+
+#folder-div {
+	position:absolute;
+	border: 2px groove #333;
+	height: 75%;
+	width: 60%;
+	padding: 20px;
+	left: 19%;
+}
+
+#folder-links {
+	height:80%;
+	border: 1px groove #333;
+	overflow: scroll;
+	list-style: circle inside;
+	padding:20px;
+}
+
+.folder-link {
+	color:blue;
+	padding-bottom:10px;
+}
+
+.folder-link:hover {
+	text-decoration:underline;
+	cursor:pointer;
+}

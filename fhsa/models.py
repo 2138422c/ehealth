@@ -29,7 +29,7 @@ class UserFolder(models.Model):
     Folders that users can create
     """
     name = models.CharField(max_length=32, unique=True)
-    description = models.TextField(max_length=500, null=True)
+    description = models.TextField(max_length=250, null=True)
     user = models.ForeignKey(UserProfile, null=True)
     id = models.AutoField(primary_key=True)
     slug = models.SlugField()
