@@ -364,12 +364,13 @@ form {
 
 .folder-option {
 	position:absolute;
-	display:inline-block;
+	display:block;
 	padding-left: 2%;
 	padding-right:2%;
+	padding-top:1.5%;
 	text-align:center;
 	border: 2px groove #333;
-	height: 80%;
+	height: 60%;
 	width: 10%;
 	text-decoration:none;
 	background-color:#333;
